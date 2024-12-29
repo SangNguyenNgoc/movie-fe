@@ -8,7 +8,7 @@ interface MySelectProps {
     onChange: (input: string) => void;
 }
 
-const MySelect = ({defaultValue, options, onChange} : MySelectProps) => {
+const MySelect = ({defaultValue, options, onChange}: MySelectProps) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -48,7 +48,7 @@ const MySelect = ({defaultValue, options, onChange} : MySelectProps) => {
 
         };
 
-    },[isDropUp]);
+    }, [isDropUp]);
 
     return (
         <div
@@ -56,13 +56,15 @@ const MySelect = ({defaultValue, options, onChange} : MySelectProps) => {
             onClick={toggleOpen}
             ref={dropdownRef}
         >
-            <div className="flex justify-between bg-primary900 items-center text-label cursor-pointer border-label border-2 px-2 py-1  rounded-md">
+            <div
+                className="flex justify-between bg-primary900 items-center text-label cursor-pointer border-label border-2 px-2 py-1  rounded-md">
                 <input
                     value={options.find(item => item.value === defaultValue)?.label || options[0].label}
                     className="bg-transparent cursor-pointer border-transparent outline-none ring-0"
                     readOnly={true}
                 />
-                {isDropUp ? <ChevronUpIcon className="text-label w-5 h-5"/> : <ChevronDownIcon className="text-label w-5 h-5"/>}
+                {isDropUp ? <ChevronUpIcon className="text-label w-5 h-5"/> :
+                    <ChevronDownIcon className="text-label w-5 h-5"/>}
 
             </div>
             {isOpen && (

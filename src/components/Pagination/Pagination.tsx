@@ -8,7 +8,7 @@ interface PaginationProps {
     onPageChange: (page: number) => void;
 }
 
-const Pagination = ({ totalPage, currPage, size, onPageChange } : PaginationProps) => {
+const Pagination = ({totalPage, currPage, size, onPageChange}: PaginationProps) => {
 
     const getPaginationGroup = () => {
         const start = Math.floor((currPage - 1) / size) * size;

@@ -18,21 +18,23 @@ const NavBar = ({data}: NavBarProps) => {
                     <div key={item.key} className="group/button relative">
                         {item.dropdown ? (
                             <div
-                                className={`flex justify-center items-center ${location.pathname.startsWith(item.path || '')  ? ' text-textPrimary' : ' text-label'}`}
+                                className={`flex justify-center items-center ${location.pathname.startsWith(item.path || '') ? ' text-textPrimary' : ' text-label'}`}
                             >
                                 {item.text}
-                                <ChevronDownIcon className="w-5 h-5" />
-                            </div> ): (
-                                <NavLink
-                                    to={item.path ? item.path : '/'}
-                                    className={({ isActive }) => isActive ? "text-textPrimary" : "text-label"}>
-                                    {item.text}
-                                </NavLink>
-                            )
+                                <ChevronDownIcon className="w-5 h-5"/>
+                            </div>) : (
+                            <NavLink
+                                to={item.path ? item.path : '/'}
+                                className={({isActive}) => isActive ? "text-textPrimary" : "text-label"}>
+                                {item.text}
+                            </NavLink>
+                        )
                         }
                         {item.dropdown && (
-                            <div className="-left-2/3 origin-top-right hidden group-hover/button:block absolute z-10 divide-y divide-gray-100 shadow focus:outline-none">
-                                <div className="font-comfortaa w-full overflow-y-auto no-scrollbar max-h-[200px] text-nowrap flex flex-col items-center text-label bg-primary950 mt-4 rounded-sm" >
+                            <div
+                                className="-left-2/3 origin-top-right hidden group-hover/button:block absolute z-10 divide-y divide-gray-100 shadow focus:outline-none">
+                                <div
+                                    className="font-inter w-full overflow-y-auto no-scrollbar max-h-[200px] text-nowrap flex flex-col items-center text-label bg-primary900 mt-4 rounded-sm">
                                     {item.children?.map(item => (
                                         <NavLink
                                             key={item.key}

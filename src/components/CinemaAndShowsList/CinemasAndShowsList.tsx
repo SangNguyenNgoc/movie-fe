@@ -21,7 +21,7 @@ const CinemasAndShowsList = ({date, data}: CinemasAndShowsListProps) => {
 
     return (
         <div className="">
-            {data.map(item => <CinemasAndShowsItem key={item.slug} date={date} cinema={item} />)}
+            {data.map(item => <CinemasAndShowsItem key={item.slug} date={date} cinema={item}/>)}
         </div>
     );
 };

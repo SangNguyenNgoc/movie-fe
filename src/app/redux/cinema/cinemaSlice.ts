@@ -18,19 +18,19 @@ const cinemaSlice = createSlice({
     initialState,
     reducers: {
         createCinemaNames: (state, action: PayloadAction<TCinemaInfo[]>) => {
-            if(state.cinemaNames.length === 0) {
+            if (state.cinemaNames.length === 0) {
                 state.cinemaNames = action.payload;
             }
         },
         createCinemaDetails: (state, action: PayloadAction<TCinemaData[]>) => {
-            if(state.cinemaDetails.length === 0) {
+            if (state.cinemaDetails.length === 0) {
                 state.cinemaDetails = action.payload;
             }
         }
     }
 })
 
-export const { createCinemaNames, createCinemaDetails } = cinemaSlice.actions;
+export const {createCinemaNames, createCinemaDetails} = cinemaSlice.actions;
 
 export default cinemaSlice.reducer;
 

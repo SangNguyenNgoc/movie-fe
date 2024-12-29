@@ -4,7 +4,7 @@ import AllRoutes from "./index";
 
 const Routers = () => {
     return (
-        <RouterProvider router={AllRoutes} />
+        <RouterProvider router={AllRoutes}/>
     );
 };
 

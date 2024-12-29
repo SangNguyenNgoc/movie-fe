@@ -5,12 +5,15 @@ import ListMovie from "../../components/ListMovie";
 import React, {useState} from "react";
 import {useSearchParams} from "react-router-dom";
 import Pagination from "../../components/Pagination";
+import useTitle from "../../hooks/use-title";
 
 const MoviePage = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
     const query = searchParams.get("s") || 'showing-now';
     const [page, setPage] = useState<number>(1)
+
+    useTitle(`Phim ${query === 'showing-now' ? 'đang chiếu' : 'sắp chiếu'}`)
 
     const handleSubmit = (key: string) => {
         if (key !== query) {
@@ -40,41 +43,43 @@ const MoviePage = () => {
     if (error) return <div>Error: {(error as Error).message}</div>;
 
     return (
-        <div className="bg-primary950 mt-10 px-[90px] pt-14">
-            <div className="flex justify-items-start items-start gap-x-10">
-                <div className="uppercase font-comfortaa text-[24px] text-label border-l-4 border-textPrimary ps-2">
-                    PHIM
+        <div className="bg-primary950 min-h-screen mt-10 pt-14 flex justify-center items-start">
+            <div className="px-24 w-full max-w-[1440px]">
+                <div className="flex justify-items-start items-start gap-x-10">
+                    <div className="uppercase text-[24px] font-comfortaa text-label border-l-4 border-textPrimary ps-2">
+                        PHIM
+                    </div>
+                    <nav
+                        className="flex items-center justify-items-start gap-x-8 font-comfortaa text-[18px]">
+                        <button
+                            className={getStateButton('showing-now')}
+                            onClick={() => handleSubmit('showing-now')}
+                        >
+                            <p>Đang chiếu</p>
+                            <div className={getUnderlineButton('showing-now')}></div>
+                        </button>
+                        <button
+                            className={getStateButton('coming-soon')}
+                            onClick={() => handleSubmit('coming-soon')}
+                        >
+                            <p>Sắp chiếu</p>
+                            <div className={getUnderlineButton('coming-soon')}></div>
+                        </button>
+                    </nav>
                 </div>
-                <nav
-                    className="flex items-center justify-items-start gap-x-8 font-comfortaa text-[18px]">
-                    <button
-                        className={getStateButton('showing-now')}
-                        onClick={() => handleSubmit('showing-now')}
-                    >
-                        <p>Đang chiếu</p>
-                        <div className={getUnderlineButton('showing-now')}></div>
-                    </button>
-                    <button
-                        className={getStateButton('coming-soon')}
-                        onClick={() => handleSubmit('coming-soon')}
-                    >
-                        <p>Sắp chiếu</p>
-                        <div className={getUnderlineButton('coming-soon')}></div>
-                    </button>
-                </nav>
-            </div>
 
-            <div className="mt-10 mb-5">
-                {isLoading && <Loading/>}
-                {data && <ListMovie movies={data.data}/>}
+                <div className="mt-10 mb-5">
+                    {isLoading && <Loading/>}
+                    {data && <ListMovie movies={data.data}/>}
+                </div>
+                {data &&
+                    <Pagination
+                        totalPage={data.totalPages}
+                        onPageChange={onPageChange}
+                        currPage={page} size={5}
+                    />
+                }
             </div>
-            {data &&
-                <Pagination
-                    totalPage={data.totalPages}
-                    onPageChange={onPageChange}
-                    currPage={page} size={5}
-                />
-            }
         </div>
     );
 };

@@ -6,12 +6,12 @@ interface ListMovieProps {
     movies: TMovie[]
 }
 
-const ListMovie = ({movies} : ListMovieProps) => {
+const ListMovie = ({movies}: ListMovieProps) => {
     return (
         <div className="bg-primary950 flex flex-col">
-            <div className="grid grid-cols-4 w-full gap-11">
+            <div className="grid grid-cols-4 w-full gap-8">
                 {movies.map(movie => {
-                    return <MovieItem key={movie.slug} movie={movie} x={false} />
+                    return <MovieItem key={movie.slug} movie={movie} x={false}/>
                 })}
             </div>
         </div>

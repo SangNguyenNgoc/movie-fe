@@ -2,14 +2,15 @@ import {ListResponse} from "../types/utils/utils.types";
 import {TCinemaInfo} from "../types/cinema/CinemaInfo.types";
 import axios from "axios";
 import {TCinemaData} from "../types/cinema/CinemasMoviesShows.types";
+import {BASE_URL, END_POINTS} from "../constants/endpoints";
 
 const cinemaService = {
     fetchAllCinemas: async (): Promise<ListResponse<TCinemaInfo>> => {
-        const { data } = await axios.get('http://localhost:8080/api/v1/cinemas/home');
+        const {data} = await axios.get(`${BASE_URL}/${END_POINTS.CINEMA.URL}/${END_POINTS.CINEMA.CHILD.HOME}`);
         return data;
     },
     fetchAllCinemasMoviesShows: async (): Promise<ListResponse<TCinemaData>> => {
-        const { data } = await axios.get('http://localhost:8080/api/v1/cinemas/shows');
+        const {data} = await axios.get(`${BASE_URL}/${END_POINTS.CINEMA.URL}/${END_POINTS.CINEMA.CHILD.SHOWS}`);
         return data;
     },
     filterCinemas: (data: TCinemaData[], slug: string): TCinemaData | undefined => {
