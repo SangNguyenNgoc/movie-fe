@@ -10,15 +10,15 @@ export interface ISameDayShowsProp {
 
 const SameDayShows = ({shows, currShowId}: ISameDayShowsProp) => {
     return (
-        <div className="bg-primary800 w-full flex justify-between items-center py-3 px-4 rounded-md space-x-8">
-            <p className="text-md text-label font-inter">Suất cùng ngày</p>
-            <div className="flex w-4/5 space-x-3 overflow-x-auto no-scrollbar">
+        <div className="bg-primary800 w-full flex justify-between items-start py-3 px-4 rounded-md">
+            <p className="text-md text-label font-inter mt-1.5">Suất cùng ngày</p>
+            <div className="grid grid-cols-7 gap-y-3 w-4/5">
                 {shows.map(show => {
                     if (currShowId === show.id) {
                         return (
                             <div
                                 key={show.id}
-                                className="flex-shrink-0 bg-primary500 hover:border-primary500 cursor-pointer text-label text-md rounded-md flex items-center justify-center w-20 h-[35px]"
+                                className="bg-primary500 hover:border-primary500 cursor-pointer text-label rounded-md flex items-center justify-center w-20 h-9"
                             >
                                 {dateService.cutFromLastColon(show.startTime)}
                             </div>
@@ -27,7 +27,7 @@ const SameDayShows = ({shows, currShowId}: ISameDayShowsProp) => {
                     return (
                         <Link
                             key={show.id}
-                            className="flex-shrink-0 hover:bg-primary500 hover:border-primary500 cursor-pointer text-label border-label border text-md rounded-md flex items-center justify-center w-20 h-[35px]"
+                            className="hover:bg-primary500 hover:border-primary500 cursor-pointer text-label border-label border rounded-md flex items-center justify-center w-20 h-9"
                             to={`/show/${show.id}`}
                         >
                             {dateService.cutFromLastColon(show.startTime)}

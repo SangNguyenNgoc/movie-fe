@@ -10,6 +10,7 @@ import {RootState} from "../../app/redux/store";
 import {createCinemaNames, selectCinemasNames} from "../../app/redux/cinema/cinemaSlice";
 import AuthControl from "../AuthControl";
 import SearchMovie from "../SearchMovie";
+import Loading from "../Loading";
 
 
 const Header = () => {

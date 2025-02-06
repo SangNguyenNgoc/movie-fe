@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {LogIn, LogOut, User, UserPlus} from "lucide-react";
 import {
     DropdownMenu,
@@ -12,6 +12,7 @@ import {login, logOut} from "../../app/services/auth.service";
 import {UserCircleIcon} from "@heroicons/react/16/solid";
 import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
+import Loading from "../Loading";
 
 interface MenuItem {
     label: string;
@@ -23,7 +24,7 @@ const AuthControl = () => {
 
     const token: string | undefined = Cookies.get('access_token');
     const navigate = useNavigate();
-
+    const [loading, setLoading] = useState(false)
 
     const redirect = (url: string) => {
         navigate(url)
@@ -39,8 +40,13 @@ const AuthControl = () => {
             label: "Đăng xuất",
             icon: <LogOut/>,
             action: async () => {
-                await logOut()
-                redirect('/')
+                setLoading(true)
+                try {
+                    await logOut()
+                } finally {
+                    redirect('/')
+                    setLoading(false)
+                }
             }
         },
     ];
@@ -49,17 +55,27 @@ const AuthControl = () => {
         {
             label: "Đăng nhập",
             icon: <LogIn/>,
-            action: () => login()
+            action: () => {
+                setLoading(true)
+                login()
+            }
         },
         {
             label: "Đăng ký",
             icon: <UserPlus/>,
-            action: () => redirect('/register')
+            action: () => {
+                setLoading(true)
+                redirect('/register')
+            }
         },
     ]
 
     return (
         <>
+            {loading &&
+                <div className="absolute">
+                    <Loading />
+                </div>}
             {token ?
                 <DropdownMenu>
                     <DropdownMenuTrigger className="focus-visible:outline-none">
@@ -89,8 +105,7 @@ const AuthControl = () => {
                     <DropdownMenuTrigger className="focus-visible:outline-none">
                         <UserCircleIcon className="h-8 w-8 cursor-pointer text-placeholder"/>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-36 mt-2 bg-primary900 text-label border-none outline-none"
-                                         align={"end"}>
+                    <DropdownMenuContent className="w-36 mt-2 bg-primary900 text-label border-none outline-none" align={"end"}>
                         <DropdownMenuGroup>
                             {logInMenu.map((item, index) => (
                                 <DropdownMenuItem

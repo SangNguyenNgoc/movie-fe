@@ -62,7 +62,7 @@ const HallLayout = ({rows, selectedSeats, handleSelect}: HallLayoutProp) => {
                 return (
                     <div className="flex justify-between items-center" key={row.row}>
                         <div className="text-placeholder text-sm">{row.rowName}</div>
-                        <div className="w-3/4 flex justify-between items-center">
+                        <div className="max-w-3/4 flex justify-center items-center space-x-1.5">
                             {row.seats.map(renderSeat)}
                         </div>
                         <div className="text-placeholder text-sm">{row.rowName}</div>

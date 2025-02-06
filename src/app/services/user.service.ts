@@ -34,7 +34,7 @@ const userService = {
         const url = `${BASE_URL}/${END_POINTS.USER.URL}/${END_POINTS.USER.CHILD.PROFILE}`
         try {
             const response = await axios.get(url, {
-                headers: getAuthHeader()
+                headers: getAuthHeader(),
             });
             const profile: TProfile = response.data
             return profile

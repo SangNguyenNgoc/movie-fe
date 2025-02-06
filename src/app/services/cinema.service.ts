@@ -13,6 +13,10 @@ const cinemaService = {
         const {data} = await axios.get(`${BASE_URL}/${END_POINTS.CINEMA.URL}/${END_POINTS.CINEMA.CHILD.SHOWS}`);
         return data;
     },
+    fetchCinemaMoviesShows: async (cinemaSlug: string): Promise<TCinemaData> => {
+        const {data} = await axios.get(`${BASE_URL}/${END_POINTS.CINEMA.URL}/${END_POINTS.CINEMA.CHILD.SHOWS}/${cinemaSlug}`);
+        return data;
+    },
     filterCinemas: (data: TCinemaData[], slug: string): TCinemaData | undefined => {
         const result = data.find(item => item.slug === slug);
         if (!result) {

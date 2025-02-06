@@ -22,31 +22,14 @@ const cinemaSlice = createSlice({
                 state.cinemaNames = action.payload;
             }
         },
-        createCinemaDetails: (state, action: PayloadAction<TCinemaData[]>) => {
-            if (state.cinemaDetails.length === 0) {
-                state.cinemaDetails = action.payload;
-            }
-        }
     }
 })
 
-export const {createCinemaNames, createCinemaDetails} = cinemaSlice.actions;
+export const {createCinemaNames} = cinemaSlice.actions;
 
 export default cinemaSlice.reducer;
 
 export const selectCinemasNames = (state: RootState) => state.cinemaState.cinemaNames;
-export const selectCinemasMoviesShows = (state: RootState) => state.cinemaState.cinemaDetails;
-
-export const selectCinemaAndShowsByFilter = createSelector(
-    [selectCinemasMoviesShows, (_, filter: string) => filter],
-    (cinemasMoviesShows, filter) => {
-        if (cinemasMoviesShows.length === 0) {
-            return undefined
-        }
-        return cinemasMoviesShows.find(cinema => cinema.slug === filter)
-
-    }
-);
 
 export const selectCinemasAndAll = createSelector(
     [selectCinemasNames],

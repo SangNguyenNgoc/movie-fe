@@ -24,13 +24,16 @@ const UserInfo = ({info, toggle, handleUpdateProfile}: UserInfoProps) => {
     const [year, setYear] = useState<number>(parseInt(yearOfInfo));
     const [inputYear, setInputYear] = useState<string>(yearOfInfo);
     const [profile, setProfile] = useState<TProfile>(info)
-    const [error, setError] = useState<{ fullName?: string }>({}); // State lưu lỗi
+    const [error, setError] = useState<{ fullName?: string, phoneNumber?: string }>({}); // State lưu lỗi
 
 
     const handleInputChange = (field: keyof typeof profile, value: string) => {
         setProfile((prev) => ({...prev, [field]: value}));
         if (field === "fullName" && value.trim().length > 0) {
             setError((prev) => ({...prev, fullName: undefined}));
+        }
+        if (field === "phoneNumber" && value.trim().length > 0) {
+            setError((prev) => ({...prev, phoneNumber: undefined}));
         }
     };
 
@@ -43,10 +46,20 @@ const UserInfo = ({info, toggle, handleUpdateProfile}: UserInfoProps) => {
         }
     };
 
+    const isValidVietnamesePhoneNumber = (phone: string): boolean => {
+        const vietnamesePhoneRegex = /^(0[3|5|7|8|9])[0-9]{8}$/;
+        return vietnamesePhoneRegex.test(phone);
+    }
+
     const handleSubmit = async () => {
-        const newErrors: { fullName?: string } = {};
+        const newErrors: { fullName?: string, phoneNumber?: string } = {};
         if (!profile.fullName.trim()) {
             newErrors.fullName = "Tên không được để trống!";
+        }
+        if (profile.phoneNumber.trim()) {
+            if (!isValidVietnamesePhoneNumber(profile.phoneNumber)) {
+                newErrors.phoneNumber = "Số điện thoại sai định dạng"
+            }
         }
         setError(newErrors)
         if (Object.keys(newErrors).length === 0) {
@@ -59,6 +72,8 @@ const UserInfo = ({info, toggle, handleUpdateProfile}: UserInfoProps) => {
             }
         }
     };
+
+    console.log(error)
 
     return (
         <div className="space-y-4">
@@ -81,18 +96,23 @@ const UserInfo = ({info, toggle, handleUpdateProfile}: UserInfoProps) => {
                     <p className="text-red-500 text-xs ms-8">* {error.fullName}</p>
                 )}
             </div>
-            <div className="flex items-center space-x-3">
-                <Label htmlFor="phone" className="flex items-center gap-2">
-                    <Phone className="h-5 w-5 text-label"/>
-                </Label>
-                <Input
-                    id="phoneNumber"
-                    type="tel"
-                    placeholder="Enter your phone number"
-                    className="h-8 w-full bg-transparent text-label"
-                    value={profile.phoneNumber ?? ''}
-                    onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
-                />
+            <div className="space-y-1">
+                <div className="flex items-center space-x-3">
+                    <Label htmlFor="phone" className="flex items-center gap-2">
+                        <Phone className="h-5 w-5 text-label"/>
+                    </Label>
+                    <Input
+                        id="phoneNumber"
+                        type="tel"
+                        placeholder="Enter your phone number"
+                        className="h-8 w-full bg-transparent text-label"
+                        value={profile.phoneNumber ?? ''}
+                        onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
+                    />
+                </div>
+                {error.phoneNumber && (
+                    <p className="text-red-500 text-xs ms-8">* {error.phoneNumber}</p>
+                )}
             </div>
             <div className="flex items-center text-white space-x-3">
                 <Label htmlFor="phone" className="flex items-center gap-2">

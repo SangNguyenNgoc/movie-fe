@@ -75,7 +75,7 @@ const BookingPage = () => {
     return (
         data ?
             <>
-                <div className="mt-10 pt-10 pb-14 flex justify-center items-start min-h-screen">
+                <div className="mt-10 pt-10 pb-14 flex justify-center items-start">
                     <div className="px-24 flex justify-between items-start w-full max-w-[1440px]">
                         <div className="w-[70%] space-y-4">
                             <SameDayShows shows={data.sameShows} currShowId={showId}/>

@@ -52,9 +52,6 @@ const Profile = () => {
         }
     }
 
-    console.log(profile)
-
-
     return (
         profile ?
             <div className="space-y-4 w-[22%]">

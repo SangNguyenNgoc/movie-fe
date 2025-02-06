@@ -5,6 +5,7 @@ import React, {useState} from "react";
 import YouTube from "react-youtube";
 import dateService from "../../app/services/date.service";
 import {Dialog, DialogContent} from "../ui/Dialog";
+import movieService from "../../app/services/movie.service";
 
 interface IMovieItemProps {
     movie: TMovie
@@ -74,7 +75,7 @@ const MovieItem = ({movie, x}: IMovieItemProps) => {
                         <div
                             className="flex justify-between items-center space-x-1 w-1/5 absolute bottom-14 right-0 bg-black bg-opacity-40 ps-1 pe-2 rounded-s">
                             <StarIcon className="w-5 h-5 text-yellow-300"/>
-                            <p className="font-bold text-white">{Math.floor(movie.sumOfRatings / movie.numberOfRatings).toString()}</p>
+                            <p className="font-bold text-white">{movie.numberOfRatings === 0 ? 0 : movieService.getRating(movie.sumOfRatings, movie.numberOfRatings).toString()}</p>
                         </div>
                         <div className="absolute bottom-2 right-2 bg-primary500 bg-opacity-70 px-1.5 py-0.5 rounded">
                             <p className="font-inter font-bold text-label">T{movie.ageRestriction}</p>

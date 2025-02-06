@@ -26,7 +26,7 @@ const SearchMovie = () => {
     }
 
     const debounceHandleSearch = useCallback(
-        appUtils.debounce((value: string) => handleSearch(value), 1000), []
+        appUtils.debounce((value: string) => handleSearch(value), 500), []
     );
 
     const handleChange = (input: string) => {
@@ -71,7 +71,7 @@ const SearchMovie = () => {
                         <div className="grid grid-cols-4 w-full gap-5">
                             {movies.map(movie => {
                                 return (
-                                    <div className="flex flex-col cursor-pointer">
+                                    <div key={movie.id} className="flex flex-col cursor-pointer">
                                         <div
                                             style={{
                                                 backgroundImage: `url(${movie.poster})`,
@@ -85,7 +85,7 @@ const SearchMovie = () => {
                                             <div
                                                 className="flex justify-between items-center space-x-1 absolute bottom-10 right-0 bg-black bg-opacity-40 ps-1 pe-2 rounded-s">
                                                 <StarIcon className="w-4 h-4 text-yellow-300"/>
-                                                <p className="font-bold text-white text-xs">{Math.floor(movie.sumOfRatings / movie.numberOfRatings).toString()}</p>
+                                                <p className="font-bold text-white text-xs">{movieService.getRating(movie.sumOfRatings, movie.numberOfRatings).toString()}</p>
                                             </div>
                                             <div
                                                 className="absolute bottom-2 right-2 bg-primary500 bg-opacity-70 px-1.5 py-0.5 rounded">

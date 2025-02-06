@@ -12,7 +12,7 @@ const Footer = () => {
     ]
 
     return (
-        <footer className="bg-primary1000 h-[150px] flex justify-center items-center">
+        <footer className="absolute bg-primary1000 h-[150px] flex justify-center items-center bottom-0 w-full">
             <div className="flex flex-col px-24 pt-8 space-y-3 w-full max-w-[1440px]">
                 <div className="flex justify-between items-center">
                     <Logo/>

@@ -1,12 +1,13 @@
-export const BASE_URL = `http://localhost:8080/api/v1`
-export const AUTH_URL = `http://localhost:8080`
-export const APP_URL = `http://localhost:3000`
+export const BASE_URL = process.env.REACT_APP_BASE_URL || ''
+export const AUTH_URL = process.env.REACT_APP_AUTH_URL || ''
+export const APP_URL = process.env.REACT_APP_APP_URL ||  ''
 
 export const END_POINTS = {
     AUTH: {
         AUTHORIZE: 'authorize',
         TOKEN: 'token',
-        REDIRECT: 'authorized'
+        REDIRECT: 'authorized',
+        LOGOUT: 'logout',
     },
     CINEMA: {
         URL: 'cinemas',
@@ -22,14 +23,14 @@ export const END_POINTS = {
         URL: 'movies',
         CHILD: {
             HOME: 'home',
-            SEARCH: 'search'
+            SEARCH: 'search',
+            RATING: (movieId: string, rating: number, key: string) => `${movieId}/rating?rating=${rating}&key=${key}`
         }
     },
     USER: {
         URL: 'users',
         CHILD: {
             REGISTER: 'register',
-            LOGOUT: 'logout',
             PROFILE: 'profile',
             UPDATE: 'information',
             UPDATE_AVATAR: 'avatar',

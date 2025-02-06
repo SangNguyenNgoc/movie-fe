@@ -32,7 +32,7 @@ const RowMovie = ({statusMovie}: IRowMovieProps) => {
                     <CarouselContent className="">
                         {statusMovie.movies.map(movieItem => {
                             return (
-                                <CarouselItem className="basis-1/4">
+                                <CarouselItem key={movieItem.id} className="basis-1/4">
                                     <MovieItem key={movieItem.slug} movie={movieItem} x={false}/>
                                 </CarouselItem>
                             )

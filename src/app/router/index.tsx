@@ -13,6 +13,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import BookingPage from "../../pages/BookingPage";
 import BillDetailPage from "../../pages/BillDetailPage";
 import ChangePasswordPage from "../../pages/ChangePasswordPage";
+import ForgotPasswordPage from "../../pages/ForgotPasswordPage";
 
 const AllRoutes = createBrowserRouter([
     {
@@ -80,6 +81,10 @@ const AllRoutes = createBrowserRouter([
                 <ChangePasswordPage/>
             </ProtectedRoute>
         )
+    },
+    {
+        path: '/forgot-password',
+        element: <ForgotPasswordPage />
     }
 ]);
 export default AllRoutes

@@ -20,6 +20,18 @@ const movieService = {
     searchMoviesBySlug: async (slug: string): Promise<TMovie[]> => {
         const {data} = await axios.get(`${BASE_URL}/${END_POINTS.MOVIE.URL}/${END_POINTS.MOVIE.CHILD.SEARCH}?search=${slug}`)
         return data;
+    },
+    ratingMovie: async (slug: string, rating: number) => {
+        let key = localStorage.getItem('rating-key')
+        if (key == null) {
+            key = crypto.randomUUID()
+            localStorage.setItem('rating-key', key)
+        }
+        const {data} = await axios.post(`${BASE_URL}/${END_POINTS.MOVIE.URL}/${END_POINTS.MOVIE.CHILD.RATING(slug, rating, key)}`)
+        return data
+    },
+    getRating: (sum: number, num: number) => {
+        return Math.round((sum / num) * 10) / 10
     }
 }
 

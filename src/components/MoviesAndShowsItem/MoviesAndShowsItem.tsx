@@ -13,9 +13,6 @@ interface MoviesAndShowsItemProps {
 const MoviesAndShowsItem = ({date, movie}: MoviesAndShowsItemProps) => {
 
     const showsRender = showService.classifyShowsByUniqueValues(movie.shows.filter(show => date === show.startDate));
-
-    console.log(1)
-
     if (showsRender.size <= 0) {
         return (
             <></>
