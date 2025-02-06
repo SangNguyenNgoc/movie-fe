@@ -1,30 +1,23 @@
-# Giai đoạn 1: Build ứng dụng React
-FROM node:22.8.0 AS build
+# Sử dụng Node image làm base image
+FROM node:18
 
+# Tạo và thiết lập thư mục làm việc trong container
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install --frozen-lockfile
+# Sao chép package.json và package-lock.json (nếu có) vào container
+COPY package.json package-lock.json ./
 
+# Cài đặt các phụ thuộc của dự án
+RUN npm install
+
+# Sao chép toàn bộ mã nguồn ứng dụng vào container
 COPY . .
-ARG REACT_APP_BASE_URL
-ARG REACT_APP_AUTH_URL
-ARG REACT_APP_APP_URL
-ENV REACT_APP_BASE_URL=$REACT_APP_BASE_URL
-ENV REACT_APP_AUTH_URL=$REACT_APP_AUTH_URL
-ENV REACT_APP_APP_URL=$REACT_APP_APP_URL
 
+# Xây dựng ứng dụng React
 RUN npm run build
 
-# Giai đoạn 2: Dùng Nginx để phục vụ React App
-FROM nginx:latest
+# Cung cấp cổng mà ứng dụng sẽ chạy trên đó
+EXPOSE 3000
 
-# Copy file build React vào Nginx
-COPY --from=build /app/build /usr/share/nginx/html
-
-# Copy file cấu hình Nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+# Chạy ứng dụng React trong chế độ production
+CMD ["npx", "serve", "build"]
