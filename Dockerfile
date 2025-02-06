@@ -1,6 +1,5 @@
 # Sử dụng Node image làm base image
-FROM node:18
-
+FROM node:22.8.0 AS build
 # Tạo và thiết lập thư mục làm việc trong container
 WORKDIR /app
 
