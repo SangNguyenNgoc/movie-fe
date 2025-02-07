@@ -1,22 +1,13 @@
-# Sử dụng Node image làm base image
-FROM node:22.8.0 AS build
-# Tạo và thiết lập thư mục làm việc trong container
+# Build Stage
+FROM node:18-alpine AS build
 WORKDIR /app
-
-# Sao chép package.json và package-lock.json (nếu có) vào container
-COPY package.json package-lock.json ./
-
-# Cài đặt các phụ thuộc của dự án
+COPY package*.json ./
 RUN npm install
-
-# Sao chép toàn bộ mã nguồn ứng dụng vào container
 COPY . .
-
-# Xây dựng ứng dụng React
 RUN npm run build
 
-# Cung cấp cổng mà ứng dụng sẽ chạy trên đó
-EXPOSE 3000
-
-# Chạy ứng dụng React trong chế độ production
-CMD ["npx", "serve", "build"]
+# Production Stage
+FROM nginx:stable-alpine AS production
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
