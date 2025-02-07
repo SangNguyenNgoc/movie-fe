@@ -7,7 +7,7 @@ import axios from "axios";
 const config = {
     authority: AUTH_URL,
     client_id: 'web-client',
-    redirect_uri: `${'http://143.198.80.174:3000'}/${END_POINTS.AUTH.REDIRECT}`,
+    redirect_uri: `${APP_URL}/${END_POINTS.AUTH.REDIRECT}`,
     response_type: "code",
     scope: "openid",
     userStore: new WebStorageStateStore({store: window.localStorage}),
