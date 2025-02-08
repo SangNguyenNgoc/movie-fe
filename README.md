@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Test Account
 **Username**: nngocsang32@gmail.com \
-**Password**: 123456789
+**Password**: 12345678
 
 ## Available Scripts
 
