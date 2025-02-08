@@ -23,13 +23,9 @@ const MoviesAndShowsList = ({date, data}: MoviesAndShowsListProps) => {
         <div className="space-y-6 pt-3">
             {data.movies.map(movie => {
                 return (
-                    <>
-                        <div key={movie.slug}>
-                            <MoviesAndShowsItem date={date} movie={movie}/>
-                        </div>
-                        <div className="w-[95%] bg-placeholder h-[1px]"></div>
-                    </>
-
+                    <div key={movie.slug}>
+                        <MoviesAndShowsItem date={date} movie={movie}/>
+                    </div>
                 )
             })}
         </div>

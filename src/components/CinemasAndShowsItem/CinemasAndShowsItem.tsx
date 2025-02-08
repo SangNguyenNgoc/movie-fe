@@ -26,7 +26,7 @@ const CinemasAndShowsItem = ({date, cinema}: CinemasAndShowsItemProps) => {
                                 {Array.from(showsRender.entries()).map(([format, shows]) => (
                                     <div key={format}
                                          className="mt-1 flex justify-items-start items-start space-x-16">
-                                        <div className="h-[35px] flex justify-items-start items-center">
+                                        <div className="h-[35px] w-24 flex justify-items-start items-center">
                                             <p className="text-label font-comfortaa text-sm">{format}</p>
                                         </div>
                                         <div className="grid grid-cols-7 gap-y-3 gap-x-3">

@@ -13,6 +13,7 @@ interface MoviesAndShowsItemProps {
 const MoviesAndShowsItem = ({date, movie}: MoviesAndShowsItemProps) => {
 
     const showsRender = showService.classifyShowsByUniqueValues(movie.shows.filter(show => date === show.startDate));
+
     if (showsRender.size <= 0) {
         return (
             <></>
@@ -63,6 +64,7 @@ const MoviesAndShowsItem = ({date, movie}: MoviesAndShowsItemProps) => {
                     </div>
                 </div>
             </div>
+            <div className="w-[95%] bg-placeholder h-[1px] mt-4"></div>
         </div>
     );
 };
