@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {LogIn, LogOut, User, UserPlus} from "lucide-react";
 import {
     DropdownMenu,
@@ -8,9 +8,8 @@ import {
     DropdownMenuLabel,
     DropdownMenuTrigger
 } from '../ui/DropDownMenu';
-import {login, logOut} from "../../app/services/auth.service";
+import {checkUser, login, logOut} from "../../app/services/auth.service";
 import {UserCircleIcon} from "@heroicons/react/16/solid";
-import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
 import Loading from "../Loading";
 
@@ -22,7 +21,7 @@ interface MenuItem {
 
 const AuthControl = () => {
 
-    const token: string | undefined = Cookies.get('access_token');
+    const [auth, setAuth] = useState(false)
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false)
 
@@ -43,6 +42,7 @@ const AuthControl = () => {
                 setLoading(true)
                 try {
                     await logOut()
+                    setAuth(false)
                 } finally {
                     redirect('/')
                     setLoading(false)
@@ -70,13 +70,23 @@ const AuthControl = () => {
         },
     ]
 
+    useEffect(() => {
+        const check = async () => {
+            const user = await checkUser()
+            setAuth(user)
+        }
+        check()
+    }, []);
+
+    console.log(auth)
+
     return (
         <>
             {loading &&
                 <div className="absolute">
                     <Loading />
                 </div>}
-            {token ?
+            {auth ?
                 <DropdownMenu>
                     <DropdownMenuTrigger className="focus-visible:outline-none">
                         <UserCircleIcon className="h-8 w-8 cursor-pointer text-placeholder"/>

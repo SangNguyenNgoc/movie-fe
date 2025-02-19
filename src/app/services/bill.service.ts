@@ -10,7 +10,7 @@ const billService = {
         const url = `${BASE_URL}/${END_POINTS.BILL.URL}/${END_POINTS.BILL.CHILD.CURR_USER}?status=${status}&page=${page}&size=20`
         try {
             const response = await axios.get(url, {
-                headers: getAuthHeader()
+                headers: await getAuthHeader()
             })
             const billHistory: TBillDetail[] = response.data.data
             return billHistory
@@ -23,7 +23,7 @@ const billService = {
         const url = `${BASE_URL}/${END_POINTS.BILL.URL}/${billId}`
         try {
             const response = await axios.get(url, {
-                headers: getAuthHeader()
+                headers: await getAuthHeader()
             })
             const bill: TBillDetail = response.data
             return bill
@@ -52,7 +52,7 @@ const billService = {
                 data,
                 {
                     headers: {
-                        ...getAuthHeader(),
+                        ...await getAuthHeader(),
                         'Content-Type': 'application/json',
                     },
                 }

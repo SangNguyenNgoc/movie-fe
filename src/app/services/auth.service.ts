@@ -1,5 +1,5 @@
-import {UserManager, WebStorageStateStore} from "oidc-client-ts";
-import {APP_URL, AUTH_URL, BASE_URL, END_POINTS} from "../constants/endpoints";
+import {UserManager} from "oidc-client-ts";
+import {APP_URL, AUTH_URL, END_POINTS} from "../constants/endpoints";
 import Cookies from "js-cookie";
 import axios from "axios";
 
@@ -10,7 +10,6 @@ const config = {
     redirect_uri: `${APP_URL}/${END_POINTS.AUTH.REDIRECT}`,
     response_type: "code",
     scope: "openid",
-    userStore: new WebStorageStateStore({store: window.localStorage}),
 };
 
 const userManager = new UserManager(config);
@@ -24,29 +23,26 @@ export const login = async () => {
 };
 
 export const handleCallback = async () => {
-    try {
-        const user = await userManager.signinRedirectCallback(); // Nhận thông tin user
-        console.log(user)
-        if (user && user.access_token) {
-            Cookies.set('access_token', user.access_token)
-        } else {
-            console.error("No access token found in user object:", user);
-        }
-        return user;
-    } catch (err) {
-        console.error("Callback error:", err);
-    }
+    // try {
+    //     const user = await userManager.signinRedirectCallback(); // Nhận thông tin user
+    //     console.log(user)
+    //     if (user && user.access_token) {
+    //         Cookies.set('access_token', user.access_token)
+    //     } else {
+    //         console.error("No access token found in user object:", user);
+    //     }
+    //     return user;
+    // } catch (err) {
+    //     console.error("Callback error:", err);
+    // }
+    await userManager.signinRedirectCallback(); // Nhận thông tin user
 };
 
 export const logOut = async () => {
-    const token = Cookies.get('access_token')
-    if (!token) {
-        return
-    }
     try {
         const url = `${AUTH_URL}/${END_POINTS.AUTH.LOGOUT}`
-        const response = await axios.get(url, {
-            headers: getAuthHeader()
+        await axios.get(url, {
+            headers: await getAuthHeader()
         })
         Cookies.remove('access_token');
         console.log("Successfully log out")
@@ -56,11 +52,18 @@ export const logOut = async () => {
             console.error('Axios error:', error.response?.data);
         }
     }
+    await userManager.removeUser()
+    await userManager.signoutRedirectCallback()
 }
 
-export const getAuthHeader = () => {
-    const token = Cookies.get('access_token')
+export const getAuthHeader = async () => {
+    const user = await userManager.getUser()
     return {
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${user?.access_token}`,
     }
+}
+
+export const checkUser = async () => {
+    const user = await userManager.getUser()
+    return user !== null
 }

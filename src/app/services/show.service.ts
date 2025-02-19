@@ -20,7 +20,7 @@ const showService = {
     fetchShowDetail: async (id: string): Promise<TShowDetail> => {
         try {
             const {data} = await axios.get(`${BASE_URL}/${END_POINTS.SHOW.URL}/${id}`, {
-                headers: getAuthHeader()
+                headers: await getAuthHeader()
             })
             return data;
         } catch (error) {

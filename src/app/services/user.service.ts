@@ -34,7 +34,7 @@ const userService = {
         const url = `${BASE_URL}/${END_POINTS.USER.URL}/${END_POINTS.USER.CHILD.PROFILE}`
         try {
             const response = await axios.get(url, {
-                headers: getAuthHeader(),
+                headers: await getAuthHeader(),
             });
             const profile: TProfile = response.data
             return profile
@@ -56,7 +56,7 @@ const userService = {
                     gender: userData.gender
                 },
                 {
-                    headers: getAuthHeader()
+                    headers: await getAuthHeader()
                 }
             );
             const profile: TProfile = response.data
@@ -79,7 +79,7 @@ const userService = {
                 url,
                 formData,
                 {
-                    headers: getAuthHeader()
+                    headers: await getAuthHeader()
                 }
             )
             const profile: TProfile = response.data
@@ -97,7 +97,7 @@ const userService = {
         const url = `${BASE_URL}/${END_POINTS.USER.URL}/${END_POINTS.USER.CHILD.UPDATE_EMAIL}?email=${newEmail}`
         try {
             const response = await axios.get(url, {
-                headers: getAuthHeader()
+                headers: await getAuthHeader()
             })
             console.log(response)
         } catch (error) {
@@ -116,7 +116,7 @@ const userService = {
                 url,
                 request,
                 {
-                    headers: getAuthHeader()
+                    headers: await getAuthHeader()
                 }
             );
             return response.status
@@ -138,7 +138,7 @@ const userService = {
                 url,
                 formData,
                 {
-                    headers: getAuthHeader()
+                    headers: await getAuthHeader()
                 }
             )
             const profile: TProfile = response.data

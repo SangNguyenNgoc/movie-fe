@@ -73,8 +73,6 @@ const UserInfo = ({info, toggle, handleUpdateProfile}: UserInfoProps) => {
         }
     };
 
-    console.log(error)
-
     return (
         <div className="space-y-4">
             <div className="space-y-1">

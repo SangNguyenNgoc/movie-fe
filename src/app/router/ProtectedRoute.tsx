@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import Cookies from "js-cookie";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -9,31 +8,34 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
 } from "../../components/ui/AlertDialog";
-import {login} from "../services/auth.service";
+import {checkUser, login} from "../services/auth.service";
 import userService from "../services/user.service";
 import Loading from "../../components/Loading";
 import {useNavigate} from "react-router-dom";
 
 const ProtectedRoute = ({children}: { children: React.ReactNode }) => {
-    const token: string | undefined = Cookies.get('access_token');
+
     const [messageDialog, setMessageDialog] = useState<string | undefined>(undefined);
     const navigate = useNavigate()
 
+    const check = async () => {
+        return await checkUser()
+    }
+
     useEffect(() => {
         const fetchProfile = async () => {
-            try {
-                await userService.getProfileUser();
-            } catch (error) {
-                setMessageDialog('Phiên làm việc của bạn đã hết hạn, vui lòng đăng nhập lại để tiếp tục!');
-                Cookies.remove('access_token')
+            if (await check()) {
+                try {
+                    await userService.getProfileUser();
+                } catch (error) {
+                    setMessageDialog('Phiên làm việc của bạn đã hết hạn, vui lòng đăng nhập lại để tiếp tục!');
+                }
+            } else {
+                setMessageDialog('Vui lòng đăng nhập để tiêp tục!')
             }
         }
-        if (token) {
-            fetchProfile()
-        } else {
-            setMessageDialog('Vui lòng đăng nhập để tiêp tục!')
-        }
-    }, [token]);
+        fetchProfile()
+    }, []);
 
     const goBackOrHome = () => {
         if (window.history.length > 1) {
