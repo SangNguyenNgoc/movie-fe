@@ -5,7 +5,7 @@ import useTitle from "../../hooks/use-title";
 
 const ProfilePage = () => {
 
-    useTitle("Thông tin cá nhân")
+    useTitle("Thông tin tài khoản")
 
     return (
         <div className="flex h-full w-full justify-center bg-primary950 px-4 py-20 min-h-screen">

@@ -21,10 +21,9 @@ const userService = {
                 if (error.response?.status === 409) {
                     throw new Error('Email đã được sử dụng');
                 }
-
                 throw new Error(error.response?.data?.error || 'Đã có lỗi không xác định, hãy thử lại sau');
             } else {
-                console.error('Error during registration:', error);
+                // console.error('Error during registration:', error);
                 throw new Error('Đã có lỗi xảy ra trong quá trình đăng ký');
             }
         }
@@ -39,7 +38,7 @@ const userService = {
             const profile: TProfile = response.data
             return profile
         } catch (error) {
-            console.error('Error fetching profile:', error);
+            // console.error('Error fetching profile:', error);
             throw error
         }
     },
@@ -62,9 +61,9 @@ const userService = {
             const profile: TProfile = response.data
             return profile
         } catch (error) {
-            console.error('Error updating profile:', error);
+            // console.error('Error updating profile:', error);
             if (axios.isAxiosError(error)) {
-                console.error('Axios error:', error.response?.data);
+                // console.error('Axios error:', error.response?.data);
             }
             throw error
         }
@@ -85,9 +84,9 @@ const userService = {
             const profile: TProfile = response.data
             return profile
         } catch (error) {
-            console.error('Error updating avatar:', error);
+            // console.error('Error updating avatar:', error);
             if (axios.isAxiosError(error)) {
-                console.error('Axios error:', error.response?.data);
+                // console.error('Axios error:', error.response?.data);
             }
             throw error
         }
@@ -101,9 +100,9 @@ const userService = {
             })
             console.log(response)
         } catch (error) {
-            console.error('Error updating avatar:', error);
+            // console.error('Error updating avatar:', error);
             if (axios.isAxiosError(error)) {
-                console.error('Axios error:', error.response?.data);
+                // console.error('Axios error:', error.response?.data);
             }
             throw error
         }
@@ -121,9 +120,9 @@ const userService = {
             );
             return response.status
         } catch (error) {
-            console.error('Error updating password:', error);
+            // console.error('Error updating password:', error);
             if (axios.isAxiosError(error)) {
-                console.error('Axios error:', error.response?.data);
+                // console.error('Axios error:', error.response?.data);
             }
             throw error
         }
@@ -144,9 +143,9 @@ const userService = {
             const profile: TProfile = response.data
             return profile
         } catch (error) {
-            console.error('Error updating avatar:', error);
+            // console.error('Error updating avatar:', error);
             if (axios.isAxiosError(error)) {
-                console.error('Axios error:', error.response?.data);
+                // console.error('Axios error:', error.response?.data);
             }
             throw error
         }

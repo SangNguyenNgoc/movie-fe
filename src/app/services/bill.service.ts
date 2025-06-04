@@ -15,7 +15,7 @@ const billService = {
             const billHistory: TBillDetail[] = response.data.data
             return billHistory
         } catch (error) {
-            console.log('Error fetching bill: ', error)
+            // console.log('Error fetching bill: ', error)
         }
     },
 
@@ -28,7 +28,7 @@ const billService = {
             const bill: TBillDetail = response.data
             return bill
         } catch (error) {
-            console.log('Error fetching bill: ', error)
+            // console.log('Error fetching bill: ', error)
         }
     },
 
@@ -59,9 +59,9 @@ const billService = {
             );
             return response.data
         } catch (error) {
-            console.error('Error create bill:', error);
+            // console.error('Error create bill:', error);
             if (axios.isAxiosError(error)) {
-                console.error('Axios error:', error.response?.data);
+                // console.error('Axios error:', error.response?.data);
             }
             throw error
         }

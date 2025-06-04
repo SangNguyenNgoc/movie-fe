@@ -9,7 +9,6 @@ import {
     AlertDialogHeader,
 } from "../../components/ui/AlertDialog";
 import {checkUser, login} from "../services/auth.service";
-import userService from "../services/user.service";
 import Loading from "../../components/Loading";
 import {useNavigate} from "react-router-dom";
 
@@ -18,16 +17,11 @@ const ProtectedRoute = ({children}: { children: React.ReactNode }) => {
     const [messageDialog, setMessageDialog] = useState<string | undefined>(undefined);
     const navigate = useNavigate()
 
-    const check = async () => {
-        return await checkUser()
-    }
-
     useEffect(() => {
         const fetchProfile = async () => {
-            if (await check()) {
-                try {
-                    await userService.getProfileUser();
-                } catch (error) {
+            const user = await checkUser()
+            if (user) {
+                if (user.expired) {
                     setMessageDialog('Phiên làm việc của bạn đã hết hạn, vui lòng đăng nhập lại để tiếp tục!');
                 }
             } else {

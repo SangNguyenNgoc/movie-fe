@@ -31,7 +31,6 @@ const Profile = () => {
                 setProfile(data)
             }
         } catch (error) {
-            console.log('Invalid token')
         }
 
     }

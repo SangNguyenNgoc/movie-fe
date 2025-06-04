@@ -14,6 +14,7 @@ import BookingPage from "../../pages/BookingPage";
 import BillDetailPage from "../../pages/BillDetailPage";
 import ChangePasswordPage from "../../pages/ChangePasswordPage";
 import ForgotPasswordPage from "../../pages/ForgotPasswordPage";
+import SilentRenewPage from "../../pages/RenewRedirectPage";
 
 const AllRoutes = createBrowserRouter([
     {
@@ -57,6 +58,10 @@ const AllRoutes = createBrowserRouter([
     {
         path: '/authorized',
         element: <AuthorizedPage/>
+    },
+    {
+        path: '/oidc-silent-redirect',
+        element: <SilentRenewPage/>
     },
     {
         path: '/register',

@@ -31,7 +31,7 @@ const AuthControl = () => {
 
     const menuItems: MenuItem[] = [
         {
-            label: "Thông tin",
+            label: "Tài khoản",
             icon: <User/>,
             action: () => redirect('/profile')
         },
@@ -73,12 +73,10 @@ const AuthControl = () => {
     useEffect(() => {
         const check = async () => {
             const user = await checkUser()
-            setAuth(user)
+            setAuth(user !== null)
         }
         check()
     }, []);
-
-    console.log(auth)
 
     return (
         <>

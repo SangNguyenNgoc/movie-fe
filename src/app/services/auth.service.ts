@@ -1,18 +1,20 @@
-import {UserManager} from "oidc-client-ts";
+import {UserManager, UserManagerSettings} from "oidc-client-ts";
 import {APP_URL, AUTH_URL, END_POINTS} from "../constants/endpoints";
 import Cookies from "js-cookie";
 import axios from "axios";
 
 
-const config = {
+const config: UserManagerSettings = {
     authority: AUTH_URL,
     client_id: 'web-client',
     redirect_uri: `${APP_URL}/${END_POINTS.AUTH.REDIRECT}`,
+    silent_redirect_uri: `${APP_URL}/oidc-silent-redirect`,
     response_type: "code",
     scope: "openid",
+    automaticSilentRenew: true
 };
 
-const userManager = new UserManager(config);
+export const userManager = new UserManager(config);
 
 export const login = async () => {
     try {
@@ -42,7 +44,8 @@ export const logOut = async () => {
     try {
         const url = `${AUTH_URL}/${END_POINTS.AUTH.LOGOUT}`
         await axios.get(url, {
-            headers: await getAuthHeader()
+            headers: await getAuthHeader(),
+            withCredentials: true
         })
         Cookies.remove('access_token');
         console.log("Successfully log out")
@@ -64,6 +67,6 @@ export const getAuthHeader = async () => {
 }
 
 export const checkUser = async () => {
-    const user = await userManager.getUser()
-    return user !== null
+    return await userManager.getUser()
 }
+
