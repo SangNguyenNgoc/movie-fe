@@ -13,7 +13,6 @@ import {
 import Loading from "../../components/Loading";
 import {RootState} from "../../app/redux/store";
 import useTitle from "../../hooks/use-title";
-import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "../../components/ui/Carousel";
 import {TCinemaData} from "../../app/types/cinema/CinemasMoviesShows.types";
 import DateOption from "../../components/DateOption";
 
@@ -67,9 +66,9 @@ const CinemaPage = () => {
 
     return (
         <div className="mt-10 min-h-screen pt-14 pb-14 flex justify-center items-start">
-            <div className="px-24 w-full flex justify-between max-w-[1440px]">
+            <div className="px-36 w-full flex justify-between max-w-[1440px]">
                 <div className="w-4/5 space-y-6">
-                    <div className="font-comfortaa text-[24px] text-label border-l-4 border-textPrimary ps-2">
+                    <div className="font-comfortaa text-[20px] text-label border-l-4 border-textPrimary ps-2">
                         Lịch chiếu
                     </div>
                     <div className="flex justify-between items-center border-b-2 border-primary700 pb-4 w-[95%]">
@@ -87,7 +86,7 @@ const CinemaPage = () => {
                         data={cinemaMovieShows}/>}
                 </div>
                 <div className="w-1/3 space-y-6 ps-4">
-                    <div className="font-comfortaa text-[24px] text-label border-l-4 border-textPrimary ps-2">
+                    <div className="font-comfortaa text-[20px] text-label border-l-4 border-textPrimary ps-2">
                         Thông tin chi tiết
                     </div>
                     <div className="text-label space-y-3">

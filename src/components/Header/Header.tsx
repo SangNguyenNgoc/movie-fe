@@ -10,7 +10,6 @@ import {RootState} from "../../app/redux/store";
 import {createCinemaNames, selectCinemasNames} from "../../app/redux/cinema/cinemaSlice";
 import AuthControl from "../AuthControl";
 import SearchMovie from "../SearchMovie";
-import Loading from "../Loading";
 
 
 const Header = () => {
@@ -60,7 +59,7 @@ const Header = () => {
 
     return (
         <header className="fixed z-20 box-border bg-primary1000 h-20 w-screen top-0 flex justify-center items-center">
-            <div className="flex justify-between mx-16 items-center h-full w-full max-w-[1440px]">
+            <div className="flex justify-evenly mx-16 items-center h-full w-full max-w-[1440px]">
                 <NavLink to={'/'} className="cursor-pointer">
                     <Logo/>
                 </NavLink>

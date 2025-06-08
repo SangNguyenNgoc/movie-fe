@@ -63,17 +63,17 @@ const MovieItem = ({movie, x}: IMovieItemProps) => {
                     </div>
                 </div>
                 :
-                <div className="flex flex-col cursor-pointer w-72">
+                <div className="flex flex-col cursor-pointer w-[260px]">
                     <div
                         style={{
                             backgroundImage: `url(${movie.poster})`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
                         }}
-                        className="rounded-xl relative group/movie w-full h-[450px]"
+                        className="rounded-md relative group/movie w-full h-[406px]"
                     >
                         <div
-                            className="flex justify-between items-center space-x-1 w-1/5 absolute bottom-14 right-0 bg-black bg-opacity-40 ps-1 pe-2 rounded-s">
+                            className="flex justify-between items-center space-x-1 w-1/5 absolute bottom-14 right-0 bg-black bg-opacity-40 ps-1 pe-2 rounded-sm">
                             <StarIcon className="w-5 h-5 text-yellow-300"/>
                             <p className="font-bold text-white">{movie.numberOfRatings === 0 ? 0 : movieService.getRating(movie.sumOfRatings, movie.numberOfRatings).toString()}</p>
                         </div>
@@ -81,23 +81,23 @@ const MovieItem = ({movie, x}: IMovieItemProps) => {
                             <p className="font-inter font-bold text-label">T{movie.ageRestriction}</p>
                         </div>
                         <div
-                            className="flex flex-col gap-3 justify-center items-center bg-black bg-opacity-60 absolute w-full h-full opacity-0 group-hover/movie:opacity-100 transition-opacity duration-500 ease-in-out rounded-xl">
+                            className="flex flex-col gap-3 justify-center items-center bg-black bg-opacity-60 absolute w-full h-full opacity-0 group-hover/movie:opacity-100 transition-opacity duration-500 ease-in-out rounded-sm text-xs">
                             <Link to={`/movie/${movie.slug}?c=all&d=${dateService.getToday()}`}
-                                  className="flex justify-center gap-2 items-center text-label font-inter bg-textPrimary border-textPrimary border-2 rounded-lg w-2/5 h-10 hover:bg-primary500 hover:border-primary500">
+                                  className="flex justify-center gap-2 items-center text-label font-inter bg-textPrimary border-textPrimary border-2 rounded-md w-2/5 py-1.5 hover:bg-primary500 hover:border-primary500">
                                 <TicketIcon className="w-5 h-5"/>
                                 Đặt vé
                             </Link>
                             <button onClick={handleModal}
-                                    className="flex justify-center gap-2 items-center text-white font-inter border-label border-2 rounded-lg w-2/5 h-10 hover:bg-primary500 hover:border-primary500">
+                                    className="flex justify-center gap-2 items-center text-white font-inter border-label border-2 rounded-md w-2/5 py-1.5 hover:bg-primary500 hover:border-primary500">
                                 <PlayCircleIcon className="w-5 h-5"/>
                                 Trailer
                             </button>
                         </div>
                     </div>
-                    <div className="text-white uppercase mt-3">
+                    <div className="text-white caption mt-3 font-semibold">
                         {movie.subName}
                     </div>
-                    <div className="text-placeholder uppercase mt-1">
+                    <div className="text-placeholder caption mt-1">
                         {movie.name}
                     </div>
                     <Dialog open={isModalOpen}>

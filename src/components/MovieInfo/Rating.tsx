@@ -52,13 +52,13 @@ const Rating = ({movieDetail} : RatingProps) => {
     return (
         <Dialog  open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <div className="flex justify-items-start mt-3 cursor-pointer">
+                <div className="flex justify-items-start mt-2 cursor-pointer w-fit">
                     <div className="flex justify-items-start items-center space-x-1 pe-2">
-                        <StarIcon className="w-8 h-8 text-yellow-300 text-opacity-60"/>
+                        <StarIcon className="w-6 h-6 text-yellow-300 text-opacity-60"/>
                         {rated ?
-                            <p className="font-bold text-label text-2xl">{movieDetail.numberOfRatings + 1 === 0 ? 0 : movieService.getRating(movieDetail.sumOfRatings + rated,movieDetail.numberOfRatings + 1).toString()}</p>
+                            <p className="font-bold text-label text-xl">{movieDetail.numberOfRatings + 1 === 0 ? 0 : movieService.getRating(movieDetail.sumOfRatings + rated,movieDetail.numberOfRatings + 1).toString()}</p>
                             :
-                            <p className="font-bold text-label text-2xl">{movieDetail.numberOfRatings === 0 ? 0 : movieService.getRating(movieDetail.sumOfRatings, movieDetail.numberOfRatings).toString()}</p>
+                            <p className="font-bold text-label text-xl">{movieDetail.numberOfRatings === 0 ? 0 : movieService.getRating(movieDetail.sumOfRatings, movieDetail.numberOfRatings).toString()}</p>
                         }
                     </div>
                     <div className="flex justify-items-start items-end">

@@ -22,7 +22,7 @@ const BillItem = ({item}: BillItemProps) => {
 
     return (
         <div
-            className="relative bg-primary900 bg-opacity-75 w-full h-fit py-2 ps-8 pe-2 flex justify-between">
+            className="relative bg-primary900 bg-opacity-75 w-full h-fit ps-8 pe-2 flex">
             <div
                 className="absolute h-full left-0 top-0 items-center flex justify-center">
                 <div className="bg-primary950 rounded-r-full w-3 h-1/4"></div>
@@ -39,31 +39,31 @@ const BillItem = ({item}: BillItemProps) => {
                             backgroundImage: `url(${item.show.movie.poster})`,
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
-                            height: '100px',
-                            width: '75px',
+                            height: '80px',
+                            width: '60px',
                         }}
                         className="top-3 left-2 flex-shrink-0 rounded-md bg-black"
                     >
                     </div>
                     <div>
                         <div className="space-y-2 h-fit">
-                            <p className="font-comfortaa capitalize text-label text-lg font-medium drop-shadow-lg text-left">{item.show.movie.subName}</p>
+                            <p className="font-comfortaa capitalize text-label text-sm t font-medium drop-shadow-lg text-left">{item.show.movie.subName}</p>
                             <div
                                 className="flex justify-start space-x-4 items-center">
-                                <p className="font-inter text-placeholder text-sm">{item.show.format.version} - {item.show.format.caption}</p>
+                                <p className="font-inter text-placeholder text-xs">{item.show.format.version} - {item.show.format.caption}</p>
                                 <div
                                     className="bg-primary500 bg-opacity-70 px-1.5 py-0.5 rounded w-fit h-fit">
-                                    <p className="font-comfortaa font-bold text-sm text-label">T{item.show.movie.ageRestriction}</p>
+                                    <p className="font-comfortaa font-bold text-xs text-label">T{item.show.movie.ageRestriction}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="space-y-2 h-fit pe-5 text-left">
-                    <p className="font-comfortaa capitalize text-label text-sm font-medium drop-shadow-lg">
+                <div className="space-y-2 h-fit pe-5 text-left text-xs">
+                    <p className="font-comfortaa capitalize text-label font-medium drop-shadow-lg">
                         {item.show.hall.cinema.name} - {item.show.hall.name.split("-")[0]}
                     </p>
-                    <p className="font-comfortaa capitalize text-label text-sm font-medium drop-shadow-lg">
+                    <p className="font-comfortaa capitalize text-label font-medium drop-shadow-lg">
                         {dateService.cutFromLastColon(item.show.startTime)} - {dateService.formatDateIncludeYear(item.show.startDate)}
                     </p>
                 </div>
@@ -72,7 +72,7 @@ const BillItem = ({item}: BillItemProps) => {
                     <Dialog>
                         <DialogTrigger>
                             <div
-                                className="text-textPrimary font-comfortaa text-sm font-semibold">
+                                className="text-textPrimary font-comfortaa text-xs font-semibold hover:underline">
                                 Chi tiết
                             </div>
                         </DialogTrigger>

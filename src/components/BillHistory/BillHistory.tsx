@@ -42,14 +42,14 @@ const BillHistory = () => {
             }
             return (
                 <div key={date}
-                     className="h-full text-lg text-center text-placeholder font-comfortaa space-y-1">
+                     className="h-full text-lg text-center text-placeholder font-comfortaa space-y-1.5">
                     <div className="w-full flex justify-center items-center space-x-3">
                         <div className="w-full h-[1px] bg-placeholder"></div>
                         <p
                             className="text-placeholder font-comfortaa text-sm text-nowrap">{`Tháng ${date}`}</p>
                         <div className="w-full h-[1px] bg-placeholder"></div>
                     </div>
-                    <div className="space-y-5">
+                    <div className="space-y-7">
                         {bills.map(item => {
                             return (
                                 <BillItem item={item} key={item.id}/>
@@ -63,9 +63,9 @@ const BillHistory = () => {
 
     return (
         billList ?
-            <div className="space-y-2 w-[65%]">
+            <div className="space-y-2 w-[55%]">
                 <div className="flex justify-between items-center border-placeholder">
-                    <h1 className="text-textPrimary text-2xl font-comfortaa">Lịch sử giao dịch</h1>
+                    <h1 className="text-textPrimary text-xl font-comfortaa">Lịch sử giao dịch</h1>
                     <Select value={billStatus} onValueChange={setBillStatus}>
                         <SelectTrigger className="w-[180px] text-label h-8 outline-none">
                             <SelectValue placeholder="Đã thanh toán"/>
@@ -81,11 +81,11 @@ const BillHistory = () => {
                 <div className="h-full text-sm text-placeholder font-comfortaa">
                     <p>Lưu ý: Chỉ hiển thị 20 giao dịch gần nhất.</p>
                 </div>
-                <div className="w-full space-y-5">
+                <div className="w-full space-y-8">
                     {renderBill()}
                 </div>
             </div> :
-            <div className="h-screen w-[65%]">
+            <div className="h-screen w-[55%]">
                 <Loading/>
             </div>
 

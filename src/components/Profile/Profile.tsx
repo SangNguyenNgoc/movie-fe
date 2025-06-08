@@ -53,25 +53,26 @@ const Profile = () => {
 
     return (
         profile ?
-            <div className="space-y-4 w-[22%]">
-                <div
-                    className="flex items-center border-b border-label pb-3 flex-col space-x-0 space-y-4">
-                    <div className="rounded-full flex justify-center items-center w-full relative max-w-80">
-                        <Avatar className="h-fit w-full max-w-80">
-                            <AvatarImage src={profile.avatar} alt="@shadcn"/>
-                            <AvatarFallback>User</AvatarFallback>
-                        </Avatar>
-                        <label htmlFor="avatar"
-                               className="absolute flex justify-center items-center h-10 w-10 bottom-10 right-0 border border-placeholder rounded-full bg-primary950 cursor-pointer hover:bg-gray-700">
-                            <Settings className="h-6 w-6 text-label"></Settings>
-                        </label>
-                        <Input id="avatar" type="file" className="hidden" accept="image/*"
-                               onChange={handleChangeAvatar}/>
-                    </div>
-                    <div className="text-label md:w-full md:space-y-2">
-                        <h2 className="font-inter text-2xl">{profile.fullName}</h2>
-                        <p className="font-inter text-md text-label">Là thành viên
-                            từ: {format(profile.createDate, "dd/MM/yyyy")}</p>
+            <div className="space-y-4 w-[30%] mt-5 bg-primary900 p-6">
+                <div className="flex items-center border-b border-label pb-3 flex-col space-x-0 space-y-4">
+                    <div className="flex justify-evenly items-center w-full space-x-4">
+                        <div className="rounded-full flex justify-center items-center w-full relative max-w-20">
+                            <Avatar className="h-fit w-full max-w-20">
+                                <AvatarImage src={profile.avatar} alt="@shadcn"/>
+                                <AvatarFallback>User</AvatarFallback>
+                            </Avatar>
+                            <label htmlFor="avatar"
+                                   className="absolute flex justify-center items-center h-6 w-6 bottom-1 right-0 border border-placeholder rounded-full bg-primary950 cursor-pointer hover:bg-gray-700">
+                                <Settings className="h-6 w-6 text-label"></Settings>
+                            </label>
+                            <Input id="avatar" type="file" className="hidden" accept="image/*"
+                                   onChange={handleChangeAvatar}/>
+                        </div>
+                        <div className="text-label md:space-y-2">
+                            <h2 className="font-inter text-lg">{profile.fullName}</h2>
+                            <p className="font-inter text-sm text-label">Là thành viên
+                                từ: {format(profile.createDate, "dd/MM/yyyy")}</p>
+                        </div>
                     </div>
                     <div className="flex justify-between items-center space-x-3 w-full">
                         <div className="flex justify-start items-center space-x-4">
@@ -104,7 +105,7 @@ const Profile = () => {
                     <UserInfo info={profile} toggle={toggleEditProfile} handleUpdateProfile={handleSetProfile}/>
                 )}
             </div> :
-            <div className="h-screen w-1/4">
+            <div className="h-screen w-[30%]">
                 <Loading/>
             </div>
     )

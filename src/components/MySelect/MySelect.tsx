@@ -57,7 +57,7 @@ const MySelect = ({defaultValue, options, onChange}: MySelectProps) => {
             ref={dropdownRef}
         >
             <div
-                className="flex justify-between bg-primary900 items-center text-label cursor-pointer border-label border-2 px-2 py-1  rounded-md">
+                className="flex justify-between bg-primary900 items-center text-label cursor-pointer border-label border-2 px-2 py-2 rounded-md text-sm">
                 <input
                     value={options.find(item => item.value === defaultValue)?.label || options[0].label}
                     className="bg-transparent cursor-pointer border-transparent outline-none ring-0"

@@ -36,7 +36,7 @@ const HomePage = () => {
             <div className="bg-homeImage h-[600px] bg-center bg-repeat mt-10"></div>
             {statusAndMovies.length === 0 ? <Loading/> :
                 <div className="bg-primary950 pb-16 flex justify-center items-start">
-                    <div className="px-24 max-w-[1440px] w-full">
+                    <div className="px-36 max-w-[1440px] w-full">
                         {statusAndMovies.map(statusItem => {
                             return (<RowMovie key={statusItem.slug} statusMovie={statusItem}/>);
                         })}

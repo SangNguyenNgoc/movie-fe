@@ -19,7 +19,7 @@ const DateOption = ({date, dates, handleChangeDate}: DateOptionProps) => {
             <Carousel className="w-[90%]" opts={{
                 align: "center",
             }}>
-                <CarouselContent className="text-label">
+                <CarouselContent className="text-label text-sm">
                     <CarouselItem key={dates[0].value} className="basis-1/5">
                         <div
                             className={`p-1 ${getBgDateItem(dates[0].value)} rounded-md text-center cursor-pointer`}

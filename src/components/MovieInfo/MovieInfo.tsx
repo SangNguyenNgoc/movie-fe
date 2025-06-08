@@ -17,15 +17,15 @@ const MovieInfo = ({movieDetail}: MovieInfoProps) => {
                         backgroundImage: `url(${movieDetail.poster})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
-                        height: '440px',
-                        width: '275px',
+                        height: '420px',
+                        width: '265px',
                     }}
-                    className="flex-shrink-0 rounded-xl relative"
+                    className="flex-shrink-0 rounded-md relative"
                 ></div>
                 <div className="text-white w-full px-8 pt-20">
                     <div className="flex justify-items-start space-x-4 items-start">
-                        <h1 className="text-3xl capitalize max-w-[80%] text-label mb-1">{movieDetail.subName}</h1>
-                        <div className="bg-primary500 bg-opacity-70 w-fit px-1.5 py-0.5 rounded mt-2">
+                        <h1 className="text-2xl capitalize max-w-[80%] text-label mb-1">{movieDetail.subName}</h1>
+                        <div className="bg-primary500 bg-opacity-70 w-fit px-1.5 py-0.5 rounded mt-1">
                             <p className="font-comfortaa font-bold text-label">T{movieDetail.ageRestriction}</p>
                         </div>
                     </div>

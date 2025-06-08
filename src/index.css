@@ -32,6 +32,22 @@ code {
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
     }
+
+    .custom-scrollbar {
+        @apply overflow-auto;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        @apply size-0;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        @apply bg-transparent;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        @apply relative flex-1 rounded-full bg-neutral-200/40 bg-gray-700;
+    }
 }
 
 .primary-underline {

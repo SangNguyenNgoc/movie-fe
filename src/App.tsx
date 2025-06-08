@@ -14,10 +14,10 @@ function App() {
     }
     Cookies.set('recent_url', location.pathname + location.search)
     return (
-        <div className="relative pt-8 bg-primary950 w-full min-h-screen">
+        <div className="relative pt-8 bg-primary950 w-full max-h-screen min-h-screen overflow-y-auto custom-scrollbar">
             <Header/>
             <Outlet/>
-            <div className="h-36"></div>
+            <div className="h-12"></div>
             <Footer/>
             <Toaster/>
         </div>

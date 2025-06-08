@@ -44,13 +44,13 @@ const MoviePage = () => {
 
     return (
         <div className="bg-primary950 min-h-screen mt-10 pt-14 flex justify-center items-start">
-            <div className="px-24 w-full max-w-[1440px]">
+            <div className="px-36 w-full max-w-[1440px]">
                 <div className="flex justify-items-start items-start gap-x-10">
-                    <div className="uppercase text-[24px] font-comfortaa text-label border-l-4 border-textPrimary ps-2">
+                    <div className="uppercase text-[20px] font-comfortaa text-label border-l-4 border-textPrimary ps-2">
                         PHIM
                     </div>
                     <nav
-                        className="flex items-center justify-items-start gap-x-8 font-comfortaa text-[18px]">
+                        className="flex items-center justify-items-start gap-x-8 font-comfortaa text-[16px]">
                         <button
                             className={getStateButton('showing-now')}
                             onClick={() => handleSubmit('showing-now')}

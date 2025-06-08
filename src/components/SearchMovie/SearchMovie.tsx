@@ -45,7 +45,7 @@ const SearchMovie = () => {
     }
 
     return (
-        <div className="w-1/2 relative">
+        <div className="w-2/5 relative">
             <label
                 htmlFor="search-input"
                 className="flex border border-transparent rounded-md px-4 py-1 gap-4 items-center bg-searchText"
@@ -57,7 +57,7 @@ const SearchMovie = () => {
                     name="search-input"
                     type="text"
                     placeholder="Tìm kiếm phim..."
-                    className="border-none w-full bg-transparent focus:outline-none font-comfortaa text-label placeholder-placeholder"
+                    className="border-none w-full bg-transparent focus:outline-none font-comfortaa text-label placeholder-placeholder text-sm py-1"
                 />
                 <div>
                     <MagnifyingGlassIcon className="h-5 w-5 cursor-pointer text-placeholder"/>
@@ -68,7 +68,7 @@ const SearchMovie = () => {
                     className="absolute bg-searchText w-full rounded-md mt-3 py-4 px-6 max-h-[560px] overflow-y-auto no-scrollbar">
                     <div className="fixed h-screen w-screen top-0 left-0 z-10" onClick={handleClear}></div>
                     <div className="relative z-20">
-                        <div className="grid grid-cols-4 w-full gap-5">
+                        <div className="grid grid-cols-3 w-full gap-5">
                             {movies.map(movie => {
                                 return (
                                     <div key={movie.id} className="flex flex-col cursor-pointer">

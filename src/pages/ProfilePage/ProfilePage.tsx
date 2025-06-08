@@ -9,7 +9,7 @@ const ProfilePage = () => {
 
     return (
         <div className="flex h-full w-full justify-center bg-primary950 px-4 py-20 min-h-screen">
-            <div className="container mx-auto flex flex-col items-start justify-center gap-24 space-y-4 md:flex-row">
+            <div className="container mx-auto flex flex-col items-start justify-center gap-16 space-y-4 md:flex-row 2xl:px-16">
                 <Profile/>
                 <BillHistory/>
             </div>
