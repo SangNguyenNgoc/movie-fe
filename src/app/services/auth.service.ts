@@ -1,4 +1,4 @@
-import {UserManager, UserManagerSettings} from "oidc-client-ts";
+import {UserManager, UserManagerSettings, WebStorageStateStore} from "oidc-client-ts";
 import {APP_URL, AUTH_URL, END_POINTS} from "../constants/endpoints";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -11,7 +11,8 @@ const config: UserManagerSettings = {
     silent_redirect_uri: `${APP_URL}/oidc-silent-redirect`,
     response_type: "code",
     scope: "openid",
-    automaticSilentRenew: true
+    automaticSilentRenew: true,
+    userStore: new WebStorageStateStore({ store: window.localStorage })
 };
 
 export const userManager = new UserManager(config);
