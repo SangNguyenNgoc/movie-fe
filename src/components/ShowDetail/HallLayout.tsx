@@ -22,7 +22,7 @@ const HallLayout = ({rows, selectedSeats, handleSelect}: HallLayoutProp) => {
             return (
                 <div
                     key={seat.id}
-                    className="text-label text-xs bg-slate-700 border border-slate-700 flex justify-center items-center rounded p-0.5 w-6 cursor-default"
+                    className="text-label text-xs bg-slate-700 border border-slate-700 flex justify-center items-center w-6 py-0.5 rounded cursor-default"
                 >
                     {seat.name.slice(1)}
                 </div>
@@ -34,7 +34,7 @@ const HallLayout = ({rows, selectedSeats, handleSelect}: HallLayoutProp) => {
                 <div
                     key={seat.id}
                     onClick={() => handleSelect(seat.id, seat.name, seat.type)}
-                    className="text-label text-xs bg-primary700 border border-primary700 flex justify-center items-center rounded p-0.5 w-6 cursor-pointer"
+                    className="text-label text-xs bg-primary700 border border-primary700 flex justify-center items-center rounded w-6 py-0.5 cursor-pointer"
                 >
                     {seat.name.slice(1)}
                 </div>
@@ -47,30 +47,30 @@ const HallLayout = ({rows, selectedSeats, handleSelect}: HallLayoutProp) => {
                 onClick={() => handleSelect(seat.id, seat.name, seat.type)}
                 className={`text-label text-xs border border-${getSeatBorder(
                     seat.type.id
-                )} flex justify-center items-center rounded p-0.5 w-6 cursor-pointer hover:bg-placeholder hover:bg-opacity-50`}
+                )} flex justify-center items-center w-6 py-0.5 rounded cursor-pointer hover:bg-placeholder hover:bg-opacity-50`}
             >
                 {seat.name.slice(1)}
             </div>
         ) : (
-            <div className="w-6" key={seat.id}></div>
+            <div className="w-5" key={seat.id}></div>
         );
     };
 
     return (
-        <div className="w-full rounded-md bg-hallPrimary px-5 py-5 space-y-3">
+        <div className="w-full rounded-md bg-hallPrimary px-3 py-8 space-y-2">
             {rows.map(row => {
                 return (
                     <div className="flex justify-between items-center" key={row.row}>
-                        <div className="text-placeholder text-sm">{row.rowName}</div>
-                        <div className="max-w-3/4 flex justify-center items-center space-x-1.5">
+                        <div className="text-label w-3 text-sm text-center">{row.rowName}</div>
+                        <div className="max-w-3/4 flex justify-center items-center space-x-2">
                             {row.seats.map(renderSeat)}
                         </div>
-                        <div className="text-placeholder text-sm">{row.rowName}</div>
+                        <div className="text-label w-3 text-sm text-center">{row.rowName}</div>
                     </div>
                 )
             })}
             <div className="w-full pt-10">
-                <p className="text-placeholder text-lg w-full text-center font-inter">Màn hình</p>
+                <p className="text-placeholder text-sm w-full text-center font-inter">Màn hình</p>
                 <div className="w-full mt-2 bg-primary700 h-1 rounded"></div>
             </div>
             <div className="w-full pt-3 flex justify-between items-center text-label font-inter text-xs">

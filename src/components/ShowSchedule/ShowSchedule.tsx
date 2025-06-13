@@ -1,5 +1,4 @@
 import React from 'react';
-import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "../ui/Carousel";
 import MySelect from "../MySelect";
 import appUtils from "../../app/services/utils.service";
 import CinemaAndShowsList from "../CinemaAndShowsList";

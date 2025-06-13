@@ -21,11 +21,12 @@ function App() {
     return (
         <div
             ref={containerRef}
-            className="relative pt-8 bg-primary950 w-full max-h-screen min-h-screen overflow-y-auto custom-scrollbar"
+            className="relative pt-8 bg-primary950 w-full h-screen overflow-y-auto custom-scrollbar flex flex-col"
         >
             <Header />
-            <Outlet />
-            <div className="h-12"></div>
+            <div className="flex-1 pb-12">
+                <Outlet />
+            </div>
             <Footer />
             <Toaster />
         </div>

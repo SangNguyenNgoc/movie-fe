@@ -130,7 +130,7 @@ const BillConfirm = ({data, selectedSeats, handleReset}: BillConfirmProp) => {
                     }}>
                         Quay lại
                     </Button>
-                    <Button className="w-1/2 bg-primary hover:bg-opacity-80" onClick={handlePayment}>Thanh toán</Button>
+                    <Button className="w-1/2 bg-primary bg-opacity-90 hover:bg-opacity-60" onClick={handlePayment}>Thanh toán</Button>
                 </div>
             </div>
             {isLoading === "onSubmit" && <Loading/>}

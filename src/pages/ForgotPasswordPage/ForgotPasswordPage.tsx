@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import {CircleChevronLeftIcon, DoorOpen} from "lucide-react";
+import {DoorOpen} from "lucide-react";
 import Logo from "../../components/Logo";
 import {Input} from "../../components/ui/Input";
 import {Button} from "../../components/ui/Button";

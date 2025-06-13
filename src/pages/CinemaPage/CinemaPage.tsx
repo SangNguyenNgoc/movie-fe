@@ -65,7 +65,7 @@ const CinemaPage = () => {
     if (cinemas.length <= 0 || cinemaMovieShows === undefined) return <Loading/>
 
     return (
-        <div className="mt-10 min-h-screen pt-14 pb-14 flex justify-center items-start">
+        <div className="mt-10 pt-14 pb-14 flex justify-center items-start">
             <div className="px-36 w-full flex justify-between max-w-[1440px]">
                 <div className="w-4/5 space-y-6">
                     <div className="font-comfortaa text-[20px] text-label border-l-4 border-textPrimary ps-2">

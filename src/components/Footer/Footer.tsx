@@ -12,8 +12,8 @@ const Footer = () => {
     ]
 
     return (
-        <footer className="bg-primary1000 h-[150px] flex justify-center items-center bottom-0 w-full">
-            <div className="flex flex-col px-24 pt-8 space-y-3 w-full max-w-[1440px]">
+        <footer className="bg-primary1000 h-40 min-h-40 flex justify-center items-center w-full">
+            <div className="flex flex-col px-24 pt-4 space-y-3 w-full max-w-[1440px]">
                 <div className="flex justify-between items-center">
                     <Logo/>
                     <div className="flex justify-center items-center space-x-4">

@@ -8,6 +8,7 @@ import BillConfirm from "../../components/ShowDetail/BillConfirm";
 import {useParams} from "react-router-dom";
 import {useToast} from "../../hooks/use-toast";
 import {ToastAction} from "../../components/ui/toast";
+import useTitle from "../../hooks/use-title";
 
 export interface ISelectSeat {
     id: number
@@ -16,13 +17,17 @@ export interface ISelectSeat {
 }
 
 const BookingPage = () => {
-
     const {showId} = useParams<string>();
 
     const [data, setData] = useState<TShowDetail | undefined>(undefined)
     const [selectedSeats, setSelectSeats] = useState<ISelectSeat[]>([])
 
     const {toast} = useToast()
+    let pageTitle = document.title;
+    if (!pageTitle.startsWith('Đặt vé phim')) {
+        pageTitle = data ? `Đặt vé phim ${data.movie.subName}` : "Loading...";
+    }
+    useTitle(pageTitle);
 
     const handleSelectSeat = (id: number, name: string, type: TSeatType) => {
         const exists = selectedSeats.some(seat => seat.id === id);
@@ -76,8 +81,8 @@ const BookingPage = () => {
         data ?
             <>
                 <div className="mt-10 pt-10 pb-14 flex justify-center items-start">
-                    <div className="px-24 flex justify-between items-start w-full max-w-[1440px]">
-                        <div className="w-[70%] space-y-4">
+                    <div className="px-36 flex justify-between items-start w-full max-w-[1440px]">
+                        <div className="w-[70%] space-y-5">
                             <SameDayShows shows={data.sameShows} currShowId={showId}/>
                             <HallLayout rows={data.hall.rows} selectedSeats={selectedSeats}
                                         handleSelect={handleSelectSeat}/>
