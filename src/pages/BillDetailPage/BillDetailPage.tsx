@@ -22,7 +22,6 @@ const BillDetailPage = () => {
         const fetchData = async () => {
             try {
                 const data = await billService.fetchOneBillById(billId ?? '');
-                console.log(data)
                 setData(data)
             } catch (error) {
                 console.log(error)
@@ -32,10 +31,12 @@ const BillDetailPage = () => {
     }, [billId]);
 
     return (
-        <div className="relative w-screen min-h-screen bg-loginBackground flex justify-center items-start pt-6">
+        <div
+            className="relative w-screen h-screen bg-loginBackground overflow-y-auto custom-scrollbar flex justify-center items-start pt-6 pb-10">
             <div className="absolute left-7 top-5">
                 <Link className="font-comfortaa text-primary text-[16px] flex space-x-3" to={'/'}>
-                    <DoorOpen></DoorOpen> <i className="fa-solid fa-door-open text-primary text-[16px]"></i> Trang chủ
+                    <DoorOpen></DoorOpen> <i className="fa-solid fa-door-open text-primary text-[16px]"></i> Trang
+                    chủ
                 </Link>
             </div>
             {data ?
@@ -46,7 +47,8 @@ const BillDetailPage = () => {
                             Đặt vé thành công !!!
                         </p>
                         <p className="text-label font-comfortaa text-center">
-                            Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi, chúc bạn có những phút giây xem phim thật thư
+                            Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi, chúc bạn có những phút giây xem phim thật
+                            thư
                             giãn.
                         </p>
                     </div>
@@ -104,6 +106,19 @@ const BillDetailPage = () => {
                                         .join(', ')
                                     }
                                 </p>
+                            </div>
+                        </div>
+                        <div className="font-inter text-sm px-6 mt-3 flex justify-start items-start space-x-4">
+                            <p className="text-placeholder">Combo</p>
+                            <div>
+                                {data.concessions.map(c => {
+                                    return (
+                                        <div className="flex justify-start items-end space-x-2">
+                                            <p className="text-placeholder">{c.amount}x</p>
+                                            <p className="text-label font-light">{c.name}</p>
+                                        </div>
+                                    )
+                                })}
                             </div>
                         </div>
                         <div className="relative w-full h-1 flex justify-center items-center px-6">

@@ -11,6 +11,7 @@ export type TBillDetail = {
     status: TBillStatus
     show: TShowInBillDetail
     tickets: TTicketInBillDetail[]
+    concessions: TConcessionInBillDetail[]
 }
 
 export type TBillStatus = {
@@ -74,5 +75,10 @@ export type TSeatTypeInBillDetail = {
     id: number,
     name: string,
     price: number
+}
+
+export type TConcessionInBillDetail = {
+    name: string
+    amount: number
 }
 

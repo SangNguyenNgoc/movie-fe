@@ -42,7 +42,7 @@ const BillHistory = () => {
             }
             return (
                 <div key={date}
-                     className="h-full text-lg text-center text-placeholder font-comfortaa space-y-1.5">
+                     className="h-full text-lg text-center text-placeholder font-comfortaa space-y-3">
                     <div className="w-full flex justify-center items-center space-x-3">
                         <div className="w-full h-[1px] bg-placeholder"></div>
                         <p

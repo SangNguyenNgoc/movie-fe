@@ -26,10 +26,10 @@ module.exports = {
       colors: {
         glxCustom: "#034ea2",
         vipSeat: "rgb(147,73,8)",
-        hallPrimary: "rgb(3,16,28,1)",
-        primary800: "rgb(5,23,43)",
+        hallPrimary: "rgb(5,24,43)",
         primary950: "#030E19",
         primary900: "#061D33",
+        primary800: "rgb(9,36,69)",
         textPrimary: "#58C9FC",
         primary700: "rgba(18, 86, 153, 1)",
         primary500: "#0CAAF2",

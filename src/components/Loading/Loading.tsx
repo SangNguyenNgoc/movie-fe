@@ -2,7 +2,7 @@ import React from 'react';
 
 const Loading = () => {
     return (
-        <div className="w-full h-screen">
+        <div className="w-full flex-1">
             <div
                 className="fixed z-50 inset-0 flex w-screen h-screen items-center justify-center bg-primary1000 bg-opacity-30">
                 <div role="status">

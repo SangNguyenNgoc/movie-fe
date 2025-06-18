@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
-import {TBillCreate, TShowDetail} from "../../app/types/show/ShowDetail.types";
+import {TShowDetail} from "../../app/types/show/ShowDetail.types";
 import dateService from "../../app/services/date.service";
 import appUtils from "../../app/services/utils.service";
 import {Button} from "../ui/Button";
-import {ISelectSeat} from "../../pages/BookingPage/BookingPage";
-import billService from "../../app/services/bill.service";
 import Loading from "../Loading";
 import {
     AlertDialog,
@@ -14,20 +12,37 @@ import {
     AlertDialogFooter,
     AlertDialogHeader
 } from "../ui/AlertDialog";
+import {useBooking} from "../../contexts/booking-context/booking-context";
+import CountDownTimer from "../CountDownTimer";
+import {ISelectedSeat} from "../../contexts/booking-context/type";
 
 interface BillConfirmProp {
     data: TShowDetail
-    selectedSeats: ISelectSeat[]
-    handleReset: () => void
 }
 
-const BillConfirm = ({data, selectedSeats, handleReset}: BillConfirmProp) => {
+const BillConfirm = ({data}: BillConfirmProp) => {
 
-    const [isLoading, setIsLoading] = useState<'onSubmit' | 'beforeSubmit' | 'failure'>('beforeSubmit');
+    const [isLoading, setIsLoading] = useState<'onSubmit' | 'normal' | 'failure'>('normal');
+    const {bookingState,
+        handleResetSeat,
+        handleSubmit,
+        step,
+        preStep
+    } = useBooking()
 
-    const totalValue = selectedSeats.reduce((sum, item) => sum + item.type.price, 0);
+    const selectedSeats = bookingState.selectedSeats
+    const selectedConcessions = bookingState.selectedConcessions
+    const expireTime = bookingState.expireTime
 
-    const seatData: Map<number, ISelectSeat[]> = new Map<number, ISelectSeat[]>()
+    const totalValue = () => {
+        const sumOfSeats = selectedSeats.reduce((sum, item) => sum + item.type.price, 0);
+        const sumOfConcession = selectedConcessions.reduce((total, item) => {
+            return total + item.price * item.amount;
+        }, 0);
+        return sumOfSeats + sumOfConcession
+    }
+
+    const seatData: Map<number, ISelectedSeat[]> = new Map<number, ISelectedSeat[]>()
 
     for (const item of selectedSeats) {
         const key = item.type.id
@@ -37,27 +52,30 @@ const BillConfirm = ({data, selectedSeats, handleReset}: BillConfirmProp) => {
         seatData.get(key)!.push(item);
     }
 
-
-    const handlePayment = async () => {
-        if (selectedSeats.length !== 0) {
-            setIsLoading('onSubmit'); // Bật trạng thái loading
-            try {
-                const bill: TBillCreate = {
-                    showId: data.id,
-                    seatIds: selectedSeats.map((item) => item.id),
-                };
-                window.location.href = await billService.submitBill(bill);
-            } catch (error) {
-                console.error("Payment failed:", error);
-                setIsLoading('failure')
-            }
+    const submit = async () => {
+        setIsLoading('onSubmit')
+        try {
+            await handleSubmit()
+            setIsLoading('normal')
+        } catch (e) {
+            console.log("Submit failure")
+            setIsLoading('failure')
         }
     }
 
+
     return (
         <>
+            {expireTime &&
+                <div className="flex justify-center items-end space-x-2 mb-2">
+                    <p className="text-sm font-comfortaa text-label">Thời gian giữ ghế: </p>
+                    <div className="text-primary text-sm font-comfortaa">
+                        <CountDownTimer targetDate={new Date(expireTime)} handleTimeUp={() => (console.log("up"))} />
+                    </div>
+                </div>
+            }
             <div className="bg-primary800 h-3 w-full rounded-t-md"></div>
-            <div className="bg-hallPrimary w-full rounded-b-md p-3 pb-4">
+            <div className="bg-hallPrimary w-full rounded-b-md p-3 pb-4 shadow-md">
                 <div className="flex justify-start items-start w-full gap-x-3 py-3">
                     <div className="">
                         <div
@@ -97,8 +115,8 @@ const BillConfirm = ({data, selectedSeats, handleReset}: BillConfirmProp) => {
                         <div className="w-full text-label font-inter space-y-2 pb-3">
                             {Array.from(seatData.entries()).map(([type, seats]) => {
                                 return (
-                                    <>
-                                        <div key={type} className="flex justify-between items-center w-full">
+                                    <div key={type}>
+                                        <div className="flex justify-between items-center w-full">
                                             <p className="font-inter text-label text-sm drop-shadow-lg">
                                                 {seats.length + 'x'} {type === 1 ? 'Ghế thường' : "Ghế VIP"}
                                             </p>
@@ -109,7 +127,29 @@ const BillConfirm = ({data, selectedSeats, handleReset}: BillConfirmProp) => {
                                         <p className="font-inter capitalize text-label text-sm drop-shadow-lg">
                                             Ghế: {seats.map(seat => seat.name).join(", ")}
                                         </p>
-                                    </>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                        <div className="w-full h-1 border-b-2 border-dashed border-placeholder mb-4"></div>
+                    </>
+                }
+                {
+                    selectedConcessions.length !== 0 &&
+                    <>
+                        <div className="w-full text-label font-inter space-y-2 pb-3">
+                            {selectedConcessions.map(item => {
+                                return (
+                                    <div key={item.id}>
+                                        <div className="flex justify-between items-center w-full">
+                                            <p className="font-inter text-label text-sm drop-shadow-lg">
+                                                {item.amount + 'x'} {item.name}
+                                            </p>
+                                            <p className="font-inter capitalize text-label text-sm drop-shadow-lg">
+                                                {appUtils.formatVND(item.price * item.amount)}
+                                            </p>
+                                        </div>
+                                    </div>
                                 )
                             })}
                         </div>
@@ -121,16 +161,24 @@ const BillConfirm = ({data, selectedSeats, handleReset}: BillConfirmProp) => {
                         Tổng cộng
                     </p>
                     <p className="drop-shadow-lg text-primary">
-                        {appUtils.formatVND(totalValue)}
+                        {appUtils.formatVND(totalValue())}
                     </p>
                 </div>
                 <div className="flex justify-between items-center text-label text-md mt-8 gap-x-4">
-                    <Button className="w-1/2 border-placeholder border-2 hover:bg-placeholder" onClick={() => {
-                        window.location.href = `/movie/${data.movie.slug}?c=${data.hall.cinema.slug}&d=${data.startDate}`
-                    }}>
+                    <Button
+                        className="w-1/2 border-placeholder border-2 hover:bg-placeholder"
+                        size={"sm"}
+                        onClick={preStep}
+                    >
                         Quay lại
                     </Button>
-                    <Button className="w-1/2 bg-primary bg-opacity-90 hover:bg-opacity-60" onClick={handlePayment}>Thanh toán</Button>
+                    <Button
+                        className="w-1/2 bg-primary bg-opacity-80 hover:bg-opacity-60"
+                        onClick={submit}
+                        size={"sm"}
+                    >
+                        {step === 3 ? "Thanh toán" : "Tiếp theo"}
+                    </Button>
                 </div>
             </div>
             {isLoading === "onSubmit" && <Loading/>}
@@ -144,8 +192,8 @@ const BillConfirm = ({data, selectedSeats, handleReset}: BillConfirmProp) => {
                     <AlertDialogFooter>
                         <AlertDialogAction
                             onClick={() => {
-                                handleReset()
-                                setIsLoading('beforeSubmit')
+                                handleResetSeat()
+                                setIsLoading('normal')
                             }}
                             className="bg-primary500"
                         >

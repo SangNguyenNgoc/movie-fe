@@ -34,8 +34,8 @@ const ListImage = ({images} : ListImageProps) => {
                                 {images.map((item, index) => {
                                     return (
                                         <CarouselItem key={index}
-                                                      className="basis-1/3 flex justify-center items-center">
-                                            <img src={item.path} alt={''}/>
+                                                      className="basis-1/3 flex justify-start items-center">
+                                            <img src={item.path} alt={''} className="h-48"/>
                                         </CarouselItem>
                                     )
                                 })}

@@ -33,7 +33,7 @@ const CinemasAndShowsItem = ({date, cinema}: CinemasAndShowsItemProps) => {
                                                 return (
                                                     <ShowItem
                                                         key={show.id}
-                                                        url={`/show/${show.id}`}
+                                                        url={`/booking/${show.id}`}
                                                         time={show.startTime}
                                                     />
                                                 )

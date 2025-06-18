@@ -4,6 +4,7 @@ import {TBillDetail} from "../types/bill/BillDetail.types";
 import {getAuthHeader} from "./auth.service";
 import {format} from "date-fns";
 import {TBillCreate} from "../types/show/ShowDetail.types";
+import {TAddCessionToBill, TBillSession} from "../types/bill/BillInSession.types";
 
 const billService = {
     fetchBillByCurrUser: async (page: number, status: string) => {
@@ -44,7 +45,7 @@ const billService = {
         return groups;
     },
 
-    submitBill: async (data: TBillCreate): Promise<string> => {
+    createSession: async (data: TBillCreate): Promise<TBillSession> => {
         const url = `${BASE_URL}/${END_POINTS.BILL.URL}`
         try {
             const response = await axios.post(
@@ -62,6 +63,51 @@ const billService = {
             // console.error('Error create bill:', error);
             if (axios.isAxiosError(error)) {
                 // console.error('Axios error:', error.response?.data);
+            }
+            throw error
+        }
+    },
+
+    deleteSession: async (billId: string): Promise<void> => {
+        const url = `${BASE_URL}/${END_POINTS.BILL.URL}/${billId}`
+        try {
+            const response = await axios.delete(
+                url,
+                {
+                    headers: {
+                        ...await getAuthHeader(),
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+            console.log(response.data)
+        } catch (error) {
+            // console.error('Error create bill:', error);
+            if (axios.isAxiosError(error)) {
+                // console.error('Axios error:', error.response?.data);
+            }
+            throw error
+        }
+    },
+
+    addConcessionToBill: async (billId: string, data: TAddCessionToBill): Promise<string> => {
+        const url = `${BASE_URL}/${END_POINTS.BILL.URL}/${billId}/${END_POINTS.BILL.CHILD.ADD_CONCESSIONS}`
+        try {
+            const response = await axios.post(
+                url,
+                data,
+                {
+                    headers: {
+                        ...await getAuthHeader(),
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+            return response.data
+        } catch (error) {
+            console.error('Error create bill:', error);
+            if (axios.isAxiosError(error)) {
+                console.error('Axios error:', error.response?.data);
             }
             throw error
         }

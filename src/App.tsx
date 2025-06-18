@@ -9,7 +9,7 @@ import {Toaster} from "./components/ui/toaster";
 function App() {
     const location = useLocation();
     const containerRef = useRef<HTMLDivElement>(null);
-
+    
     useEffect(() => {
         const recentUrl = Cookies.get("recent_url")?.split("?")[0];
         if (recentUrl !== undefined && !location.pathname.endsWith(recentUrl)) {
@@ -23,7 +23,7 @@ function App() {
             ref={containerRef}
             className="relative pt-8 bg-primary950 w-full h-screen overflow-y-auto custom-scrollbar flex flex-col"
         >
-            <Header />
+            {!location.pathname.startsWith('/show') && <Header />}
             <div className="flex-1 pb-12">
                 <Outlet />
             </div>

@@ -42,11 +42,21 @@ export const END_POINTS = {
     BILL: {
         URL: 'bills',
         CHILD: {
-            CURR_USER: 'user'
+            CURR_USER: 'user',
+            ADD_CONCESSIONS: 'concessions'
         }
     },
     SHOW: {
         URL: 'shows'
+    },
+    CONCESSION: {
+        URL: 'concessions',
+    },
+    PAYMENT: {
+        URL: 'payments',
+        CHILD: {
+            PAY: 'redirect-url'
+        }
     }
 }
 

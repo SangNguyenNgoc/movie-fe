@@ -101,7 +101,7 @@ const MovieItem = ({movie, x}: IMovieItemProps) => {
                         {movie.name}
                     </div>
                     <Dialog open={isModalOpen}>
-                        <DialogContent className="w-[90%] h-screen border-none max-w-full text-label">
+                        <DialogContent className="w-screen h-screen border-none max-w-full text-label">
                             <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50"
                                  onClick={handleModal}>
                                 <div className="relative w-5/6 h-4/5 bg-black flex justify-center items-center">

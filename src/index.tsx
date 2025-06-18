@@ -9,7 +9,6 @@ import {store} from "./app/redux/store";
 
 const queryClient = new QueryClient();
 
-
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );

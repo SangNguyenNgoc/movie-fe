@@ -1,11 +1,9 @@
 import React from 'react';
-import {TRowSeat, TSeat, TSeatType} from "../../app/types/show/ShowDetail.types";
-import {ISelectSeat} from "../../pages/BookingPage/BookingPage";
+import {TRowSeat, TSeat} from "../../app/types/show/ShowDetail.types";
+import {useBooking} from "../../contexts/booking-context/booking-context";
 
 interface HallLayoutProp {
     rows: TRowSeat[]
-    selectedSeats: ISelectSeat[]
-    handleSelect: (id: number, name: string, type: TSeatType) => void
 }
 
 const getSeatBorder = (id: number): string => {
@@ -15,7 +13,11 @@ const getSeatBorder = (id: number): string => {
     return 'placeholder'
 }
 
-const HallLayout = ({rows, selectedSeats, handleSelect}: HallLayoutProp) => {
+const HallLayout = ({rows}: HallLayoutProp) => {
+
+    const {bookingState, handleSelectSeat} = useBooking()
+
+    const selectedSeats = bookingState.selectedSeats
 
     const renderSeat = (seat: TSeat) => {
         if (seat.isReserved) {
@@ -33,7 +35,7 @@ const HallLayout = ({rows, selectedSeats, handleSelect}: HallLayoutProp) => {
             return (
                 <div
                     key={seat.id}
-                    onClick={() => handleSelect(seat.id, seat.name, seat.type)}
+                    onClick={() => handleSelectSeat(seat.id, seat.name, seat.type)}
                     className="text-label text-xs bg-primary700 border border-primary700 flex justify-center items-center rounded w-6 py-0.5 cursor-pointer"
                 >
                     {seat.name.slice(1)}
@@ -44,7 +46,7 @@ const HallLayout = ({rows, selectedSeats, handleSelect}: HallLayoutProp) => {
         return seat.name ? (
             <div
                 key={seat.id}
-                onClick={() => handleSelect(seat.id, seat.name, seat.type)}
+                onClick={() => handleSelectSeat(seat.id, seat.name, seat.type)}
                 className={`text-label text-xs border border-${getSeatBorder(
                     seat.type.id
                 )} flex justify-center items-center w-6 py-0.5 rounded cursor-pointer hover:bg-placeholder hover:bg-opacity-50`}
@@ -52,12 +54,12 @@ const HallLayout = ({rows, selectedSeats, handleSelect}: HallLayoutProp) => {
                 {seat.name.slice(1)}
             </div>
         ) : (
-            <div className="w-5" key={seat.id}></div>
+            <div className="w-6" key={seat.id}></div>
         );
     };
 
     return (
-        <div className="w-full rounded-md bg-hallPrimary px-3 py-8 space-y-2">
+        <div className="w-full rounded-md bg-hallPrimary px-3 py-8 space-y-2 shadow-md">
             {rows.map(row => {
                 return (
                     <div className="flex justify-between items-center" key={row.row}>

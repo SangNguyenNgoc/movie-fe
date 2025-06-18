@@ -15,6 +15,8 @@ import BillDetailPage from "../../pages/BillDetailPage";
 import ChangePasswordPage from "../../pages/ChangePasswordPage";
 import ForgotPasswordPage from "../../pages/ForgotPasswordPage";
 import SilentRenewPage from "../../pages/RenewRedirectPage";
+import {BookingProvider} from "../../contexts/booking-context/booking-context";
+import BookingHeader from "../../components/BookingDetail/BookingHeader";
 
 const AllRoutes = createBrowserRouter([
     {
@@ -46,10 +48,13 @@ const AllRoutes = createBrowserRouter([
                 element: <MovieDetail/>
             },
             {
-                path: 'show/:showId',
+                path: 'booking/:showId',
                 element: (
                     <ProtectedRoute>
-                        <BookingPage/>
+                        <BookingProvider>
+                            <BookingHeader/>
+                            <BookingPage/>
+                        </BookingProvider>
                     </ProtectedRoute>
                 )
             }
